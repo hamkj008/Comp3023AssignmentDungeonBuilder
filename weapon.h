@@ -1,11 +1,16 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
+#include "item.h"
 
-class Weapon
-{
+
+class Weapon : public Item {
+
 public:
     Weapon();
+
+
+    Item clone() override;
 };
 
 #endif // WEAPON_H

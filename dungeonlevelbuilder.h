@@ -1,11 +1,25 @@
 #ifndef DUNGEONLEVELBUILDER_H
 #define DUNGEONLEVELBUILDER_H
 
+#include <string>
+#include "room.h"
+
 
 class DungeonLevelBuilder
 {
 public:
     DungeonLevelBuilder();
+
+
+    virtual void buildDungeonLevel(std::string name, int width, int height) = 0;
+    virtual Room buildRoom(int id);
+    virtual void buildDoorway(Room origin, Room destination, Direction direction, MoveConstraints constraints);
+    virtual void buildEntrance(Room room, Direction direction);
+    virtual void buildExit(Room room, Direction direction);
+    virtual void buildItem(Room);
+    virtual void buildCreature(Room);
+    virtual DungeonLevel getDungeonLevel();
+
 };
 
 #endif // DUNGEONLEVELBUILDER_H
