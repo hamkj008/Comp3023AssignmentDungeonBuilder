@@ -16,15 +16,15 @@ void DungeonLevelBuilder::buildDungeonLevel(std::string name, int width, int hei
 Room DungeonLevelBuilder::buildRoom(int &id) {
 
 }
-//void DungeonLevelBuilder::buildDoorway(Room origin, Room destination, Direction direction, MoveConstraints constraints) {
+void DungeonLevelBuilder::buildDoorway(Room origin, Room destination, Room::Direction direction, MoveConstraints constraints) {
 
-//}
-//void DungeonLevelBuilder::buildEntrance(Room room, Direction direction) {
+}
+void DungeonLevelBuilder::buildEntrance(Room room, Room::Direction direction) {
 
-//}
-//void DungeonLevelBuilder::buildExit(Room room, Direction direction) {
+}
+void DungeonLevelBuilder::buildExit(Room room, Room::Direction direction) {
 
-//}
+}
 void DungeonLevelBuilder::buildItem(Room) {
 
 }

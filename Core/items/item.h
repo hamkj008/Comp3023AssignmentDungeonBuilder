@@ -11,15 +11,13 @@ class Item
 public:
     Item();
     Item(std::string &name);
+    virtual ~Item();
 
-
-    virtual Item& clone() = 0;
+    virtual Item* clone() = 0;
     virtual std::string name() const;
-//    virtual char displayCharacter() const;
+    virtual char displayCharacter() const;
 
-private:
-    std::string _name;
-    char _character;
+
 };
 }
 #endif // ITEM_H

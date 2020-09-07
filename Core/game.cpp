@@ -1,5 +1,7 @@
-#include "game.h"
 #include <iostream>
+
+#include "game.h"
+
 
 using namespace std;
 
@@ -11,12 +13,16 @@ Game::Game() {
     std::cout << "game created" << endl;
 }
 
-
-Game Game::_theInstance{};
+Game::~Game() {
+    std::cout << "game destroyed" << endl;
+}
 
 
 Game Game::instance() {
-    return _theInstance;
+    if(_theInstance == NULL) {
+        _theInstance = new Game();
+    }
+    return *_theInstance;
 }
 
 
@@ -38,7 +44,7 @@ void Game::displayLevel() {
 }
 
 double Game::randomDouble() {
-
+    return _realDistribution(_randomGenerator);
 }
 
 }

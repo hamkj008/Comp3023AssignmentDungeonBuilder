@@ -3,6 +3,8 @@
 
 #include "Core/dungeon/room.h"
 
+class AbstractCreature;
+
 namespace core::dungeon::basic {
 
 
@@ -13,13 +15,13 @@ public:
     QuartzChamber();
 
 
-//    virtual std::string description() const override;
-//    virtual std::string display();
-//    virtual int id() const override;
-//    virtual Item item();
-//    virtual void setItem(Item newItem);
-//    virtual AbstractCreature creature();
-//    virtual void setCreature(AbstractCreature newCreature);
+    virtual std::string description() const override;
+    virtual std::string display() override;
+    virtual int id() const override;
+    virtual core::items::Item item() const override;
+    virtual void setItem(core::items::Item newItem) override;
+    virtual core::creatures::AbstractCreature creature() override;
+    virtual void setCreature(core::creatures::AbstractCreature newCreature) override;
 
 
 };

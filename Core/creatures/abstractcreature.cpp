@@ -5,18 +5,18 @@ namespace core::creatures {
 
 
 AbstractCreature::AbstractCreature(std::string name)
-    : _name{name}
+    :_name{name}
 {
+
 }
 
 
-std::string AbstractCreature::name(){
+std::string AbstractCreature::name() const {
    return _name;
 }
 
-char AbstractCreature::displayCharacter() {
-    char character{};
-    return character;
+char AbstractCreature::displayCharacter() const {
+    return _character;
 }
 
 }

@@ -16,17 +16,17 @@ Room BasicDungeonLevelBuilder::buildRoom(int &id) {
 
 }
 
-//void BasicDungeonLevelBuilder::buildDoorway(Room origin, Room destination, Direction direction, MoveConstraints constraints) {
+void BasicDungeonLevelBuilder::buildDoorway(Room origin, Room destination, Room::Direction direction, MoveConstraints constraints) {
 
-//}
+}
 
-//void BasicDungeonLevelBuilder::buildEntrance(Room room, Direction direction) {
+void BasicDungeonLevelBuilder::buildEntrance(Room room, Room::Direction direction) {
 
-//}
+}
 
-//void BasicDungeonLevelBuilder::buildExit(Room room, Direction direction) {
+void BasicDungeonLevelBuilder::buildExit(Room room, Room::Direction direction) {
 
-//}
+}
 
 void BasicDungeonLevelBuilder::buildItem(Room) {
 

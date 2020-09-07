@@ -1,10 +1,7 @@
 #include <iostream>
 
 #include "room.h"
-#include "Core/items/item.h"
 
-
-//class Item;
 
 namespace core::dungeon {
 
@@ -13,23 +10,25 @@ Room::Room()
 }
 
 
-//std::string Room::display() {
+std::string Room::display() {
 
-//}
-
-
-
-//Item Room::item() {}
+}
 
 
-//void Room::setItem(Item newItem) {
 
-//}
-//AbstractCreature Room::creature() {
+core::items::Item Room::item() const {
 
-//}
-//void Room::setCreature(AbstractCreature newCreature) {
+}
 
-//}
+
+void Room::setItem(core::items::Item newItem) {
+
+}
+core::creatures::AbstractCreature Room::creature() {
+
+}
+void Room::setCreature(core::creatures::AbstractCreature newCreature) {
+
+}
 
 }
