@@ -5,7 +5,7 @@ namespace core::dungeon {
 
 DungeonLevelBuilder::DungeonLevelBuilder()
 {
-//    buildDungeonLevel();
+
 }
 
 
@@ -20,7 +20,7 @@ void DungeonLevelBuilder::buildDoorway(Room origin, Room destination, Room::Dire
 
 }
 void DungeonLevelBuilder::buildEntrance(Room room, Room::Direction direction) {
-
+    buildDoorway(start, finish, north, yes);
 }
 void DungeonLevelBuilder::buildExit(Room room, Room::Direction direction) {
 

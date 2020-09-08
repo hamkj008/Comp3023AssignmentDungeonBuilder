@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
 
 
 namespace core::dungeon {
@@ -25,7 +24,7 @@ public:
     int numberOfRooms();
     std::string name();
     virtual std::string description();
-    std::vector<string> display();
+    std::vector<std::string> display();
 
 private:
     int _width;

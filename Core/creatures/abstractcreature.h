@@ -10,7 +10,6 @@ namespace core::creatures {
 class AbstractCreature
 {
 public:
-    AbstractCreature();
     AbstractCreature(std::string name);
     virtual ~AbstractCreature();
 
@@ -21,7 +20,7 @@ public:
 
 private:
     std::string _name;
-    char _character;
+    char _displayCharacter;
 };
 }
 #endif // ABSTRACTCREATURE_H

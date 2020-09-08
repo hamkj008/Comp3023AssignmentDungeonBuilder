@@ -1,6 +1,8 @@
 #include <iostream>
+#include <memory>
 
 #include "game.h"
+#include "Core/dungeon/basic/basicdungeonlevelbuilder.h"
 
 
 using namespace std;
@@ -19,10 +21,12 @@ Game::~Game() {
 
 
 Game Game::instance() {
+    std::unique_ptr<Game> game;
+
     if(_theInstance == NULL) {
-        _theInstance = new Game();
+        game = std::make_unique<Game>();
     }
-    return *_theInstance;
+    return game->instance();
 }
 
 
@@ -37,6 +41,11 @@ void Game::createExampleLevel(){
 }
 
 void Game::createRandomLevel(std::string &name, int &width, int &height) {
+    std::unique_ptr<core::dungeon::basic::BasicDungeonLevelBuilder> basicDB
+            = std::make_unique<core::dungeon::basic::BasicDungeonLevelBuilder>();
+
+    basicDB->buildDungeonLevel(name, width, height);
+    basicDB->getDungeonLevel();
 
 }
 void Game::displayLevel() {

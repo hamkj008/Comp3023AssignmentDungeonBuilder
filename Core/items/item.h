@@ -9,7 +9,6 @@ namespace core::items {
 class Item
 {
 public:
-    Item();
     Item(std::string &name);
     virtual ~Item();
 
@@ -17,7 +16,9 @@ public:
     virtual std::string name() const;
     virtual char displayCharacter() const;
 
-
+private:
+    std::string _name;
+    char _displayCharacter;
 };
 }
 #endif // ITEM_H

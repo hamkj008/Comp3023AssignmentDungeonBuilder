@@ -4,11 +4,10 @@
 namespace core::dungeon::magical {
 
 
-//MagicalDungeonLevel::MagicalDungeonLevel()
-//{
+MagicalDungeonLevel::MagicalDungeonLevel()
+{
 
-
-//}
+}
 
 std::string MagicalDungeonLevel::description() {
 }

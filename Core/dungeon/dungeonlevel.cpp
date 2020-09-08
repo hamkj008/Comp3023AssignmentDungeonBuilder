@@ -38,7 +38,8 @@ std::string DungeonLevel::name() {
 }
 
 std::string DungeonLevel::description() {
-
+    std::string description{"Example Dungeon Level \n"
+                            "Size: " + static_cast<string>(_width) + _height};
 }
 
 std::vector<string> DungeonLevel::display() {

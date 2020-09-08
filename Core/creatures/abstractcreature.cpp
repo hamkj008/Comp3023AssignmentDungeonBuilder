@@ -15,8 +15,5 @@ std::string AbstractCreature::name() const {
    return _name;
 }
 
-char AbstractCreature::displayCharacter() const {
-    return _character;
-}
 
 }

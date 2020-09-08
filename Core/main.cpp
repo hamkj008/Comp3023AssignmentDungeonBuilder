@@ -8,19 +8,9 @@
 #include "Core/creatures/monster.h"
 #include "Core/items/weapon.h"
 
-//class QuartzChamber;
-//class RockChamber;
-//class Room;
-//class Weapon;
-class AbstractCreature;
-class Monster;
-
-using namespace std;
-
 
 int main()
 {
-
     core::MenuInterface menu{std::cout, std::cin};
     menu.displayWelcome("Kieran Hambledon", "Dungeon Builder");
 
@@ -30,13 +20,19 @@ int main()
     m.name();
     m.displayCharacter();
 
-    core::dungeon::basic::QuartzChamber q{};
+    // Polymorph base container for derived object
+    core::creatures::AbstractCreature *creature = &m;
 
-    core::items::Weapon w = new Weapon("Sword");
+    creature->displayCharacter();
+    core::dungeon::basic::QuartzChamber q{5};
+
+    core::items::Weapon *w = new core::items::Weapon("Sword");
     delete w;
-    std::unique_ptr<Game> game = std::make_unique<Game>();
-    std::cout << q.description() << std::endl;
 
+    core::Game game = core::Game::instance();
+
+    std::cout << q.description() << std::endl;
+    std::vector<std::string> nums(3);
 
     return 0;
 }

@@ -1,14 +1,23 @@
 #ifndef WALL_H
 #define WALL_H
 
+#include "Core/dungeon/roomedge.h"
+
 
 namespace core::dungeon {
 
 
-class Wall
+class Wall : public RoomEdge
 {
 public:
     Wall();
+
+    virtual std::string description() const override;
+    virtual char displayCharacter() const override;
+    virtual bool isPassage() const override;
+
+private:
+    bool _passage;
 };
 }
 #endif // WALL_H

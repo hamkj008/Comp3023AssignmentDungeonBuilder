@@ -15,7 +15,7 @@ class Game {
 
 public:
     ~Game();
-//    Game(Game &other) = delete;
+    Game(Game &other) = delete;
     Game operator =(Game &other) = delete;
 
     static Game instance();

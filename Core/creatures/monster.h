@@ -14,15 +14,13 @@ public:
     ~Monster();
 
 
-    AbstractCreature* clone() const override;
+    virtual AbstractCreature* clone() const override;
 
-    virtual std::string name() const override;
-    virtual char displayCharacter() const override;
-
+    char displayCharacter() const override;
 
 private:
-    std::string _name;
-    char _character;
+    char _displayCharacter;
+
 };
 }
 #endif // MONSTER_H

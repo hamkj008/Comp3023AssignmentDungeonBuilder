@@ -7,6 +7,7 @@
 
 namespace core::dungeon {
 
+
 class DungeonLevelBuilder
 {
 public:
@@ -23,11 +24,18 @@ public:
     };
 
 
+    // this method must use bare pointer
     virtual void buildDungeonLevel(std::string name, int width, int height);
+
+    // Room type chosen randomly
     virtual Room buildRoom(int &id);
+
     virtual void buildDoorway(Room origin, Room destination, Room::Direction direction, MoveConstraints constraints);
-    virtual void buildEntrance(Room room, Room::Direction direction);
+
+    virtual void buildEntrance(Room room, Room::Direction direction);    
     virtual void buildExit(Room room, Room::Direction direction);
+
+
     virtual void buildItem(Room);
     virtual void buildCreature(Room);
     virtual DungeonLevel getDungeonLevel();
