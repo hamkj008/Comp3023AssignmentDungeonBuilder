@@ -5,7 +5,7 @@ namespace core::dungeon::common {
 
 
 OneWayDoor::OneWayDoor()
-    : _description{"Locked Door"},
+    : _description{"One-Way Door"},
       _character{'<'},
       _passage{true}
 {

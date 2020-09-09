@@ -11,7 +11,6 @@ class Weapon final : public Item {
 
 public:
     Weapon(std::string name);
-    ~Weapon();
 
     virtual Item* clone() override;
 

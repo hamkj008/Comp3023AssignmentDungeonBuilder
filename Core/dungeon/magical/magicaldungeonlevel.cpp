@@ -4,12 +4,15 @@
 namespace core::dungeon::magical {
 
 
-MagicalDungeonLevel::MagicalDungeonLevel()
+MagicalDungeonLevel::MagicalDungeonLevel(std::string name, int width, int height)
+    : DungeonLevel(name, width, height),
+      _description{"Magic Cave"}
 {
 
 }
 
 std::string MagicalDungeonLevel::description() {
+    return _description;
 }
 
 

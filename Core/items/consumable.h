@@ -11,7 +11,6 @@ class Consumable final : public Item {
 
 public:
     Consumable(std::string name);
-    ~Consumable();
 
     virtual Item* clone() override;
 

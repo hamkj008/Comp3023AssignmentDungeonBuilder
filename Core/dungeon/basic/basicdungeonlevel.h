@@ -10,10 +10,15 @@ namespace core::dungeon::basic {
 class BasicDungeonLevel : public DungeonLevel
 {
 public:
-    BasicDungeonLevel();
+
+    BasicDungeonLevel(std::string name, int width, int height);
 
 
     std::string description() override;
+
+
+private:
+    std::string _description;
 
 };
 }

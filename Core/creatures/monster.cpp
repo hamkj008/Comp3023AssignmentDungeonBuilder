@@ -11,8 +11,6 @@ Monster::Monster(std::string name)
 
 }
 
-Monster::~Monster() {
-}
 
 AbstractCreature* Monster::clone() const {
     return new Monster(*this);

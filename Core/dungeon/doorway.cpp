@@ -8,17 +8,30 @@ Doorway::Doorway()
 {
 
 }
-
-void Doorway::connect(Doorway &opposite) {
-
+Doorway::~Doorway() {
 }
+
+//void Doorway::connect(Doorway &opposite) {
+
+//}
 bool Doorway::isEntrance() {
     bool entrance{true};
     return entrance;
 }
+
 bool Doorway::isExit() {
     bool exit{true};
     return exit;
 }
 
+
+//std::string description() {
+
+//}
+//char displayCharacter() {
+
+//}
+//bool isPassage() {
+
+//}
 }

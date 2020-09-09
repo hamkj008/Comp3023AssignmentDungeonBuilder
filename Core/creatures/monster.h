@@ -11,7 +11,6 @@ class Monster final : public AbstractCreature
 {
 public:
     Monster(std::string name);
-    ~Monster();
 
 
     virtual AbstractCreature* clone() const override;

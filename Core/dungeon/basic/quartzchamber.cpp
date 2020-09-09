@@ -1,20 +1,19 @@
 #include <iostream>
 #include "quartzchamber.h"
 
-using namespace std;
-
 
 namespace core::dungeon::basic {
 
 
-QuartzChamber::QuartzChamber(int &id)
-    : Room(id) {
-
+QuartzChamber::QuartzChamber(int unsigned id)
+    : Room(id),
+    _description{"A chamber that glitters like a thousand stars in the torchlight. (Quartz Chamber)"}
+{
     std::cout << "in quartzChamber constructor" << std::endl;
 }
 
 std::string QuartzChamber::description() const {
-    return "A chamber that glitters like a thousand stars in the torchlight. (Quartz Chamber)";
+    return _description;
 }
 
 

@@ -8,5 +8,8 @@ RoomEdge::RoomEdge()
 {
 
 }
+RoomEdge::~RoomEdge() {
+
+}
 
 }

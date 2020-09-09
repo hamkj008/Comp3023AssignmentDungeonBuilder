@@ -18,7 +18,7 @@ public:
     Game(Game &other) = delete;
     Game operator =(Game &other) = delete;
 
-    static Game instance();
+    static Game* instance();
 
 
     void setDungeonType(core::dungeon::DungeonLevelBuilder);

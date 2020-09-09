@@ -5,28 +5,27 @@
 #include "Core/dungeon/basic/basicdungeonlevelbuilder.h"
 
 
-using namespace std;
-
 
 namespace core {
 
 
-Game::Game() {
-    std::cout << "game created" << endl;
+Game::Game()
+{
+    std::cout << "game created" << std::endl;
 }
 
 Game::~Game() {
-    std::cout << "game destroyed" << endl;
+    std::cout << "game destroyed" << std::endl;
 }
 
 
-Game Game::instance() {
-    std::unique_ptr<Game> game;
+Game* Game::instance() {
 
     if(_theInstance == NULL) {
-        game = std::make_unique<Game>();
+        std::unique_ptr<Game> _theInstance = std::make_unique<Game>();
     }
-    return game->instance();
+
+    return _theInstance;
 }
 
 
@@ -37,12 +36,18 @@ void Game::setDungeonType(core::dungeon::DungeonLevelBuilder) {
 
 
 void Game::createExampleLevel(){
+    std::unique_ptr<core::dungeon::basic::BasicDungeonLevelBuilder> basicDB
+            = std::make_unique<core::dungeon::basic::BasicDungeonLevelBuilder>();
+
+    basicDB->buildDungeonLevel("Example Level", 3, 3);
+    basicDB->getDungeonLevel();
 
 }
 
 void Game::createRandomLevel(std::string &name, int &width, int &height) {
-    std::unique_ptr<core::dungeon::basic::BasicDungeonLevelBuilder> basicDB
-            = std::make_unique<core::dungeon::basic::BasicDungeonLevelBuilder>();
+
+    std::unique_ptr<core::dungeon::basic::BasicDungeonLevelBuilder>
+            basicDB = std::make_unique<core::dungeon::basic::BasicDungeonLevelBuilder>();
 
     basicDB->buildDungeonLevel(name, width, height);
     basicDB->getDungeonLevel();

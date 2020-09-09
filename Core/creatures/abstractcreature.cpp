@@ -9,7 +9,9 @@ AbstractCreature::AbstractCreature(std::string name)
 {
 
 }
+AbstractCreature::~AbstractCreature() {
 
+}
 
 std::string AbstractCreature::name() const {
    return _name;

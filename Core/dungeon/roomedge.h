@@ -11,6 +11,7 @@ class RoomEdge
 {
 public:
     RoomEdge();
+    virtual ~RoomEdge();
 
     virtual std::string description() const;
     virtual char displayCharacter() const;

@@ -40,7 +40,6 @@ public:
     virtual void buildCreature(Room);
     virtual DungeonLevel getDungeonLevel();
 
-
 };
 
 }

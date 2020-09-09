@@ -10,7 +10,7 @@ RockWall::RockWall()
 }
 
 std::string RockWall::description() const {
-    return "Rockwall";
+    return "Rock Wall";
 }
 
 char RockWall::displayCharacter() const{

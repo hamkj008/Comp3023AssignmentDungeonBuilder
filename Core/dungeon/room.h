@@ -16,8 +16,8 @@ namespace core::dungeon {
 class Room
 {
 public:
-    Room(int &id);
-
+    Room(int unsigned &id);
+    virtual ~Room();
 
     enum Direction : unsigned {
         North,
@@ -32,18 +32,21 @@ public:
 
     int id() const;
 
-    virtual core::items::Item item() const;
-    virtual void setItem(core::items::Item newItem);
-    virtual core::creatures::AbstractCreature creature();
-    virtual void setCreature(core::creatures::AbstractCreature newCreature);
+    virtual core::items::Item* item() const;
+    virtual void setItem(core::items::Item &newItem);
+    virtual core::creatures::AbstractCreature* creature();
+    virtual void setCreature(core::creatures::AbstractCreature &newCreature);
 
 
 private:
-    int _id;
+    int unsigned _id;
     RoomEdge _northEdge;
     RoomEdge _southEdge;
     RoomEdge _eastEdge;
     RoomEdge _westEdge;
+
+    core::creatures::AbstractCreature &_creature;
+    core::items::Item &_item;
 };
 
 

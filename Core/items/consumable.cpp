@@ -8,8 +8,6 @@ Consumable::Consumable(std::string name)
 {
 
 }
-Consumable::~Consumable(){
-}
 
 Item* Consumable::clone() {
     return new Consumable(*this);

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <array>
 
 #include "Core/game.h"
 #include "Core/menuinterface.h"
@@ -7,7 +8,7 @@
 #include "Core/creatures/abstractcreature.h"
 #include "Core/creatures/monster.h"
 #include "Core/items/weapon.h"
-
+#include "Core/dungeon/dungeonlevel.h"
 
 int main()
 {
@@ -15,6 +16,11 @@ int main()
     menu.displayWelcome("Kieran Hambledon", "Dungeon Builder");
 
     menu.run();
+
+
+
+
+
 
     core::creatures::Monster m{"bob"};
     m.name();
@@ -24,15 +30,14 @@ int main()
     core::creatures::AbstractCreature *creature = &m;
 
     creature->displayCharacter();
-    core::dungeon::basic::QuartzChamber q{5};
+    core::dungeon::basic::QuartzChamber *q{};
 
     core::items::Weapon *w = new core::items::Weapon("Sword");
     delete w;
 
     core::Game game = core::Game::instance();
 
-    std::cout << q.description() << std::endl;
-    std::vector<std::string> nums(3);
+    core::dungeon::DungeonLevel* dl = new core::dungeon::DungeonLevel("basic", 3, 3);
 
     return 0;
 }
