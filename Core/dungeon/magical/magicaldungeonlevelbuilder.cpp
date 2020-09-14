@@ -8,27 +8,27 @@ void MagicalDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, 
 
 }
 
-Room MagicalDungeonLevelBuilder::buildRoom(int &id) {
+std::shared_ptr<Room> MagicalDungeonLevelBuilder::buildRoom(int &id) {
 
 }
 
-void MagicalDungeonLevelBuilder::buildDoorway(Room origin, Room destination, Room::Direction direction, MoveConstraints constraints) {
+void MagicalDungeonLevelBuilder::buildDoorway(Room* origin, Room* destination, Room::Direction direction, MoveConstraints constraints) {
 
 }
 
-void MagicalDungeonLevelBuilder::buildEntrance(Room room, Room::Direction direction) {
+void MagicalDungeonLevelBuilder::buildEntrance(Room* room, Room::Direction direction) {
 
 }
 
-void MagicalDungeonLevelBuilder::buildExit(Room room, Room::Direction direction) {
+void MagicalDungeonLevelBuilder::buildExit(Room* room, Room::Direction direction) {
 
 }
 
-void MagicalDungeonLevelBuilder::buildItem(Room) {
+void MagicalDungeonLevelBuilder::buildItem(Room*) {
 
 }
 
-void MagicalDungeonLevelBuilder::buildCreature(Room) {
+void MagicalDungeonLevelBuilder::buildCreature(Room*) {
 
 }
 

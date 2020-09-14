@@ -1,13 +1,11 @@
 #include <iostream>
 #include "rockchamber.h"
 
-using namespace std;
-
 
 namespace core::dungeon::basic {
 
 
-RockChamber::RockChamber(int unsigned &id)
+RockChamber::RockChamber(int &id)
     : Room(id),
       _description{"A dark and empty chamber. (Rock Chamber)"}
 

@@ -5,7 +5,7 @@
 namespace core::dungeon::basic {
 
 
-QuartzChamber::QuartzChamber(int unsigned id)
+QuartzChamber::QuartzChamber(int &id)
     : Room(id),
     _description{"A chamber that glitters like a thousand stars in the torchlight. (Quartz Chamber)"}
 {

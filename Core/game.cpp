@@ -21,9 +21,7 @@ Game::~Game() {
 
 Game* Game::instance() {
 
-    if(_theInstance == NULL) {
-        std::unique_ptr<Game> _theInstance = std::make_unique<Game>();
-    }
+    static Game *_theInstance = new Game();
 
     return _theInstance;
 }
@@ -40,7 +38,7 @@ void Game::createExampleLevel(){
             = std::make_unique<core::dungeon::basic::BasicDungeonLevelBuilder>();
 
     basicDB->buildDungeonLevel("Example Level", 3, 3);
-    basicDB->getDungeonLevel();
+//    DungeonLevel db{basicDB->getDungeonLevel()};
 
 }
 
@@ -53,7 +51,7 @@ void Game::createRandomLevel(std::string &name, int &width, int &height) {
     basicDB->getDungeonLevel();
 
 }
-void Game::displayLevel() {
+void Game::displayLevel(std::ostream display) {
 
 }
 

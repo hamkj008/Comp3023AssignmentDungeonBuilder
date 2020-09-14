@@ -1,10 +1,11 @@
 #include "basicdungeonlevelbuilder.h"
-
+#include "Core/dungeon/basic/rockchamber.h"
+#include <iostream>
 
 namespace core::dungeon::basic {
 
 BasicDungeonLevelBuilder::BasicDungeonLevelBuilder()
-    : _db{}
+
 {
 
 }
@@ -14,50 +15,49 @@ void BasicDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, in
 
    int numberOfRooms = _db->numberOfRooms();
    int i{1};
-
-   while(i < numberOfRooms) {
-    Room room = buildRoom(i);
-    _db->addRoom(room);
-    i++;
-   }
-
-
-
-}
-
-Room BasicDungeonLevelBuilder::buildRoom(int &id) {
-     int roomID{1};
-     std::shared_ptr<core::dungeon::Room> room = std::make_shared<core::dungeon::Room>(roomID);
-
-
-     room->setItem();
-     room->setCreature();
-
-     return *room;
-}
-
-void BasicDungeonLevelBuilder::buildDoorway(Room origin, Room destination, Room::Direction direction, MoveConstraints constraints) {
+//   while(i < numberOfRooms) {
+    std::shared_ptr<Room> room1 = buildRoom(i);
+    _db->addRoom(room1);
+    std::cout << "asfter room1" << std::endl;
+    std::shared_ptr<Room> room2 = buildRoom(i);
+    _db->addRoom(room2);
+    std::cout << "asfter room2" << std::endl;
+    _db->display();
+    std::cout << "asfter" << std::endl;
+//    i++;
+//   }
 
 }
 
-void BasicDungeonLevelBuilder::buildEntrance(Room room, Room::Direction direction) {
+std::shared_ptr<Room> BasicDungeonLevelBuilder::buildRoom(int &id) {
+    std::shared_ptr<Room> room = std::make_shared<RockChamber>(id);
+    room->display();
+
+    return room;
+}
+
+void BasicDungeonLevelBuilder::buildDoorway(Room* origin, Room* destination, Room::Direction direction, MoveConstraints constraints) {
 
 }
 
-void BasicDungeonLevelBuilder::buildExit(Room room, Room::Direction direction) {
+void BasicDungeonLevelBuilder::buildEntrance(Room* room, Room::Direction direction) {
 
 }
 
-void BasicDungeonLevelBuilder::buildItem(Room) {
+void BasicDungeonLevelBuilder::buildExit(Room* room, Room::Direction direction) {
 
 }
 
-void BasicDungeonLevelBuilder::buildCreature(Room) {
+void BasicDungeonLevelBuilder::buildItem(Room*) {
+
+}
+
+void BasicDungeonLevelBuilder::buildCreature(Room*) {
 
 }
 
 DungeonLevel BasicDungeonLevelBuilder::getDungeonLevel() {
-    return _db;
+    return *_db;
 }
 
 }

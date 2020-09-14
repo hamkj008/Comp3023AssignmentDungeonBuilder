@@ -3,30 +3,32 @@
 
 #include "Core/creatures/abstractcreature.h"
 #include "Core/items/item.h"
-#include "Core/dungeon/roomedge.h"
 #include <array>
 #include <string>
 #include <memory>
 
-class RoomEdge;
+
+
 
 namespace core::dungeon {
 
+class RoomEdge;
 
 class Room
 {
 public:
-    Room(int unsigned &id);
+    Room(int &id);
     virtual ~Room();
 
-    enum Direction : unsigned {
+
+    enum class Direction : unsigned {
         North,
         South,
         East,
         West
     };
 
-    virtual std::string description() const;
+    virtual std::string description() const = 0;
 
     std::array<std::string, 5> display();
 
@@ -39,14 +41,18 @@ public:
 
 
 private:
-    int unsigned _id;
-    RoomEdge _northEdge;
-    RoomEdge _southEdge;
-    RoomEdge _eastEdge;
-    RoomEdge _westEdge;
+    int _id;
+    std::string _description;
 
-    core::creatures::AbstractCreature &_creature;
-    core::items::Item &_item;
+    std::array<std::string, 5> _roomDisplay;
+
+    core::creatures::AbstractCreature *_creature;
+    core::items::Item *_item;
+
+    std::shared_ptr<RoomEdge> _northEdge;
+    std::shared_ptr<RoomEdge> _southEdge;
+    std::shared_ptr<RoomEdge> _eastEdge;
+    std::shared_ptr<RoomEdge> _westEdge;
 };
 
 

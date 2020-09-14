@@ -13,8 +13,5 @@ std::string RockWall::description() const {
     return "Rock Wall";
 }
 
-char RockWall::displayCharacter() const{
-    return 'c';
-}
 
 }

@@ -13,11 +13,13 @@ namespace core::dungeon {
 class DungeonLevel
 {
 public:
+    DungeonLevel();
     DungeonLevel(std::string &name, int &width, int &height);
     ~DungeonLevel();
 
-    bool addRoom(Room &room);
-    Room retrieveRoom(int &id);
+
+    bool addRoom(std::shared_ptr<Room> &room);
+    Room* retrieveRoom(int &id);
     int width();
     int height();
     int numberOfRooms();
@@ -30,7 +32,8 @@ private:
     int _width;
     int _height;
 
-
+    std::vector<std::string> _dungeonDisplay;
+    std::vector<std::shared_ptr<Room>>* _rooms;
 };
 }
 #endif // DUNGEONLEVEL_H

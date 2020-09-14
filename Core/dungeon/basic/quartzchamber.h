@@ -11,7 +11,7 @@ class QuartzChamber final : public Room
 {
 public:
 
-    QuartzChamber(int unsigned id);
+    QuartzChamber(int &id);
 
 
     virtual std::string description() const override;

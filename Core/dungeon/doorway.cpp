@@ -5,15 +5,17 @@ namespace core::dungeon {
 
 
 Doorway::Doorway()
+    : _description{}
 {
 
 }
 Doorway::~Doorway() {
 }
 
-//void Doorway::connect(Doorway &opposite) {
+void Doorway::connect(Doorway &opposite) {
 
-//}
+}
+
 bool Doorway::isEntrance() {
     bool entrance{true};
     return entrance;
@@ -24,14 +26,4 @@ bool Doorway::isExit() {
     return exit;
 }
 
-
-//std::string description() {
-
-//}
-//char displayCharacter() {
-
-//}
-//bool isPassage() {
-
-//}
 }

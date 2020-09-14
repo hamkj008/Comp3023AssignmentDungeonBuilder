@@ -6,7 +6,7 @@
 namespace core::dungeon::common {
 
 
-class BlockedDoorway : public Doorway
+class BlockedDoorway : public Doorway, RoomEdge
 {
 public:
     BlockedDoorway();

@@ -24,7 +24,7 @@ public:
     void setDungeonType(core::dungeon::DungeonLevelBuilder);
     void createExampleLevel();
     void createRandomLevel(std::string &name, int &width, int &height);
-    void displayLevel();
+    void displayLevel(std::ostream display);
     double randomDouble();
 
 

@@ -9,6 +9,7 @@
 #include "Core/creatures/monster.h"
 #include "Core/items/weapon.h"
 #include "Core/dungeon/dungeonlevel.h"
+#include "Core/dungeon/wall.h"
 
 int main()
 {
@@ -35,9 +36,11 @@ int main()
     core::items::Weapon *w = new core::items::Weapon("Sword");
     delete w;
 
-    core::Game game = core::Game::instance();
+    core::dungeon::Wall wall{};
 
-    core::dungeon::DungeonLevel* dl = new core::dungeon::DungeonLevel("basic", 3, 3);
+    core::Game::instance();
+    delete core::Game::instance();
+
 
     return 0;
 }

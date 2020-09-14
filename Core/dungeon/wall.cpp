@@ -4,7 +4,7 @@ namespace core::dungeon {
 
 
 Wall::Wall()
-    : _passage{false}
+
 {
 
 }
@@ -14,12 +14,16 @@ std::string Wall::description() const {
 }
 
 char Wall::displayCharacter() const {
-    return '-';
-
+    if(this->getDirection() == Room::Direction::North or this->getDirection() == Room::Direction::South) {
+        return '-';
+    }
+    else {
+        return '|';
+    }
 }
 
 bool Wall::isPassage() const {
-   return _passage;
+    return false;
 }
 
 }

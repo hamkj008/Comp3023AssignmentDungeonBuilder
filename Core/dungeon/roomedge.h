@@ -2,10 +2,11 @@
 #define ROOMEDGE_H
 
 #include <string>
+#include "Core/dungeon/room.h"
 
 
+class Room;
 namespace core::dungeon {
-
 
 class RoomEdge
 {
@@ -13,10 +14,17 @@ public:
     RoomEdge();
     virtual ~RoomEdge();
 
-    virtual std::string description() const;
-    virtual char displayCharacter() const;
-    virtual bool isPassage() const;
+    virtual std::string description() const = 0;
+    virtual char displayCharacter() const = 0;
+    virtual bool isPassage() const = 0;
 
+
+    void setDirection(Room::Direction direction);
+    Room::Direction getDirection() const;
+
+private:
+    std::string _description;
+    Room::Direction _direction;
 };
 }
 #endif // ROOMEDGE_H

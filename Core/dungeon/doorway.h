@@ -18,9 +18,10 @@ public:
     bool isExit();
 
 
-//    virtual std::string description() const override;
-//    virtual char displayCharacter() const override;
-//    virtual bool isPassage() const override;
+
+
+private:
+    std::string _description;
 };
 }
 #endif // DOORWAY_H
