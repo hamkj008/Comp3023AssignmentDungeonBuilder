@@ -33,7 +33,7 @@ private:
     int _height;
 
     std::vector<std::string> _dungeonDisplay;
-    std::vector<std::shared_ptr<Room>>* _rooms;
+    std::vector<std::shared_ptr<Room>> _rooms;
 };
 }
 #endif // DUNGEONLEVEL_H

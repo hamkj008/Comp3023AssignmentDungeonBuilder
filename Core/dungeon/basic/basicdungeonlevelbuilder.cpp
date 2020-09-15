@@ -11,21 +11,34 @@ BasicDungeonLevelBuilder::BasicDungeonLevelBuilder()
 }
 
 void BasicDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, int height) {
-   _db = std::make_shared<DungeonLevel>(name, width, height);
+    if(width < 1) {
+        width = 1;
+    }
+    else if(width > 4) {
+        width = 4;
+    }
+    if(height < 1) {
+        height = 1;
+    }
+    else if(height > 4) {
+        height = 4;
+    }
+
+   _db = new DungeonLevel(name, width, height);
 
    int numberOfRooms = _db->numberOfRooms();
-   int i{1};
-//   while(i < numberOfRooms) {
-    std::shared_ptr<Room> room1 = buildRoom(i);
-    _db->addRoom(room1);
-    std::cout << "asfter room1" << std::endl;
-    std::shared_ptr<Room> room2 = buildRoom(i);
-    _db->addRoom(room2);
-    std::cout << "asfter room2" << std::endl;
-    _db->display();
-    std::cout << "asfter" << std::endl;
-//    i++;
-//   }
+   int i{0};
+   while(i < numberOfRooms) {
+       std::shared_ptr<Room> room = buildRoom(i);
+       _db->addRoom(room);
+       std::cout << "after room" << std::endl;
+//       std::shared_ptr<Room> room2 = buildRoom(i);
+//       _db->addRoom(room2);
+//       std::cout << "after room2" << std::endl;
+       i++;
+   }
+   _db->display();
+   std::cout << "after display" << std::endl;
 
 }
 
@@ -36,23 +49,23 @@ std::shared_ptr<Room> BasicDungeonLevelBuilder::buildRoom(int &id) {
     return room;
 }
 
-void BasicDungeonLevelBuilder::buildDoorway(Room* origin, Room* destination, Room::Direction direction, MoveConstraints constraints) {
+void BasicDungeonLevelBuilder::buildDoorway(std::shared_ptr<Room> &origin, std::shared_ptr<Room> &destination, Room::Direction direction, MoveConstraints constraints) {
 
 }
 
-void BasicDungeonLevelBuilder::buildEntrance(Room* room, Room::Direction direction) {
+void BasicDungeonLevelBuilder::buildEntrance(std::shared_ptr<Room> &room, Room::Direction direction) {
 
 }
 
-void BasicDungeonLevelBuilder::buildExit(Room* room, Room::Direction direction) {
+void BasicDungeonLevelBuilder::buildExit(std::shared_ptr<Room> &room, Room::Direction direction) {
 
 }
 
-void BasicDungeonLevelBuilder::buildItem(Room*) {
-
+void BasicDungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
+    room;
 }
 
-void BasicDungeonLevelBuilder::buildCreature(Room*) {
+void BasicDungeonLevelBuilder::buildCreature(std::shared_ptr<Room> &room) {
 
 }
 

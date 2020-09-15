@@ -10,13 +10,14 @@ AbstractCreature::AbstractCreature(std::string name)
 
 }
 AbstractCreature::~AbstractCreature() {
-
 }
 
 std::string AbstractCreature::name() const {
    return _name;
 }
 
-char AbstractCreature::displayCharacter() const {}
+char AbstractCreature::displayCharacter() const {
+    return 'C';
+}
 
 }

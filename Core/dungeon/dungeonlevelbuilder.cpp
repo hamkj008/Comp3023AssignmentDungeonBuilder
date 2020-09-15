@@ -17,22 +17,23 @@ std::shared_ptr<Room> DungeonLevelBuilder::buildRoom(int &id) {
 
 }
 
-void DungeonLevelBuilder::buildDoorway(Room* origin, Room* destination, Room::Direction direction, MoveConstraints constraints) {
+void DungeonLevelBuilder::buildDoorway(std::shared_ptr<Room> &origin,
+    std::shared_ptr<Room> &destination, Room::Direction direction, MoveConstraints constraints) {
 
 }
 
-void DungeonLevelBuilder::buildEntrance(Room* room, Room::Direction direction) {
+void DungeonLevelBuilder::buildEntrance(std::shared_ptr<Room> &room, Room::Direction direction) {
 
 }
-void DungeonLevelBuilder::buildExit(Room* room, Room::Direction direction) {
+void DungeonLevelBuilder::buildExit(std::shared_ptr<Room> &room, Room::Direction direction) {
 
 }
 
 
-void DungeonLevelBuilder::buildItem(Room*) {
+void DungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
 
 }
-void DungeonLevelBuilder::buildCreature(Room*) {
+void DungeonLevelBuilder::buildCreature(std::shared_ptr<Room> &room) {
 
 }
 DungeonLevel DungeonLevelBuilder::getDungeonLevel() {

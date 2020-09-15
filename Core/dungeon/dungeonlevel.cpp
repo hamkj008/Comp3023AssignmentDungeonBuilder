@@ -21,7 +21,7 @@ DungeonLevel::~DungeonLevel()
 
 
 bool DungeonLevel::addRoom(std::shared_ptr<Room>& room) {
-    _rooms->push_back(room);
+    _rooms.push_back(room);
     return true;
 }
 
@@ -55,20 +55,38 @@ std::string DungeonLevel::description() {
 }
 
 std::vector<std::string> DungeonLevel::display() {
-    int w = _width;
     std::stringstream ss{};
+    std::array<std::string, 5> roomDisplay{};
+    std::vector<std::string> dungeonDisplay{};
 
-//    while(w > 0) {
-//        for(std::size_t i{0}; i < _rooms.size(); i++) {
-//            std::array<std::string, 5> roomDisplay = _rooms[i].display();
-//            for(std::size_t i{0}; i < _rooms.size(); i++) {
-//                ss << roomDisplay[i];
-//            }
-//        }
-//        std::cout << r.display() << std::endl;
+    int dungeonHeight{0};
+    while(dungeonHeight < _height) {
+        // Width
+        for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
+            for(int j{0}; j < _width; ++j) {
+                roomDisplay = _rooms[j]->display();
+                ss << roomDisplay[i] << " ";
+
+            }
+            dungeonDisplay.push_back(ss.str());
+            ss.str("");
+        }
+        dungeonHeight ++;
     }
+    // Height
+//     for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
+//         for(int j{0}; j < _height; ++j) {
+//             roomDisplay = _rooms[j]->display();
+//             ss << roomDisplay[i] << " ";
+//         }
+//         dungeonDisplay.push_back(ss.str());
+//         ss.str("");
+//     }
+    for(std::string s : dungeonDisplay) {
+        std::cout << s << std::endl;
+    }
+    return dungeonDisplay;
+}
 
-
-//}
 
 }

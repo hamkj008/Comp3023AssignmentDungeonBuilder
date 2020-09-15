@@ -30,14 +30,14 @@ public:
     // Room type chosen randomly
     virtual std::shared_ptr<Room> buildRoom(int &id);
 
-    virtual void buildDoorway(Room* origin, Room* destination, Room::Direction direction, MoveConstraints constraints);
+    virtual void buildDoorway(std::shared_ptr<Room> &origin, std::shared_ptr<Room> &destination, Room::Direction direction, MoveConstraints constraints);
 
-    virtual void buildEntrance(Room* room, Room::Direction direction);
-    virtual void buildExit(Room* room, Room::Direction direction);
+    virtual void buildEntrance(std::shared_ptr<Room> &room, Room::Direction direction);
+    virtual void buildExit(std::shared_ptr<Room> &room, Room::Direction direction);
 
 
-    virtual void buildItem(Room*);
-    virtual void buildCreature(Room*);
+    virtual void buildItem(std::shared_ptr<Room> &room);
+    virtual void buildCreature(std::shared_ptr<Room> &room);
     virtual DungeonLevel getDungeonLevel();
 
 };

@@ -19,12 +19,7 @@ std::string RoomEdge::description() const{
 }
 
 char RoomEdge::displayCharacter() const {
-    if(this->getDirection() == Room::Direction::North or this->getDirection() == Room::Direction::South) {
-        return '-';
-    }
-    else {
-        return '|';
-    };
+
 }
 
 bool RoomEdge::isPassage() const {
