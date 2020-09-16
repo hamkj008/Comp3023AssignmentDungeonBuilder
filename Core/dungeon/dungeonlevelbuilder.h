@@ -28,7 +28,7 @@ public:
     virtual void buildDungeonLevel(std::string name, int width, int height);
 
     // Room type chosen randomly
-    virtual std::shared_ptr<Room> buildRoom(int &id);
+    virtual std::shared_ptr<Room> buildRoom(int id);
 
     virtual void buildDoorway(std::shared_ptr<Room> &origin, std::shared_ptr<Room> &destination, Room::Direction direction, MoveConstraints constraints);
 
@@ -37,8 +37,11 @@ public:
 
 
     virtual void buildItem(std::shared_ptr<Room> &room);
-    virtual void buildCreature(std::shared_ptr<Room> &room);
-    virtual DungeonLevel getDungeonLevel();
+    virtual void buildCreature(std::shared_ptr<Room> &room, bool isBoss);
+    virtual std::shared_ptr<DungeonLevel> getDungeonLevel();
+
+protected:
+    std::shared_ptr<DungeonLevel> _dungeonLevel;
 
 };
 

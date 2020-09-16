@@ -2,7 +2,7 @@
 #define ABSTRACTCREATURE_H
 
 #include <string>
-
+#include <memory>
 
 namespace core::creatures {
 
@@ -14,13 +14,17 @@ public:
     virtual ~AbstractCreature();
 
 
-    virtual AbstractCreature* clone() const = 0;
+    virtual std::shared_ptr<AbstractCreature> clone() const = 0;
     virtual std::string name() const;
     virtual char displayCharacter() const;
+
+    virtual void setBoss(bool boss);
+    virtual bool isBoss();
 
 private:
     std::string _name;
     char _displayCharacter;
+    bool _boss;
 };
 }
 #endif // ABSTRACTCREATURE_H

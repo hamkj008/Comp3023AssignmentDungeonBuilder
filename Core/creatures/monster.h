@@ -13,7 +13,7 @@ public:
     Monster(std::string name);
 
 
-    virtual AbstractCreature* clone() const override;
+    virtual std::shared_ptr<AbstractCreature> clone() const override;
 
     char displayCharacter() const override;
 

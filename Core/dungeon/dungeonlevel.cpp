@@ -9,7 +9,7 @@
 namespace core::dungeon {
 
 DungeonLevel::DungeonLevel(std::string &name, int &width, int &height)
-    :_name{name}, _width{width}, _height{height}, _dungeonDisplay{}, _rooms{}
+    :_name{name}, _width{width}, _height{height}, _dungeonDisplay{}, _roomList{}
 {
     std::cout << "DungeonLevel created" << std::endl;
 }
@@ -21,12 +21,12 @@ DungeonLevel::~DungeonLevel()
 
 
 bool DungeonLevel::addRoom(std::shared_ptr<Room>& room) {
-    _rooms.push_back(room);
+    _roomList.push_back(room);
     return true;
 }
 
-Room* DungeonLevel::retrieveRoom(int &id) {
-
+std::shared_ptr<Room> DungeonLevel::retrieveRoom(int id) {
+    return _roomList[id - 1];
 }
 
 
@@ -52,40 +52,37 @@ std::string DungeonLevel::description() {
           "Size: " << _width << " x " << _height <<
           "Type: ";
     std::string description{ss.str()};
+
+    return description;
 }
 
 std::vector<std::string> DungeonLevel::display() {
     std::stringstream ss{};
     std::array<std::string, 5> roomDisplay{};
-    std::vector<std::string> dungeonDisplay{};
+    std::array<std::string, 5> rDisplay{};
 
-    int dungeonHeight{0};
+    int dungeonHeight{};
+    int start{};
+    int end = _width;
+
     while(dungeonHeight < _height) {
-        // Width
+        // Holds the number of lines in the room.
         for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
-            for(int j{0}; j < _width; ++j) {
-                roomDisplay = _rooms[j]->display();
+            // appends each line in the row together depending on the width
+            for(int j = start; j < end; ++j) {
+                roomDisplay = _roomList[j]->display();
                 ss << roomDisplay[i] << " ";
 
             }
-            dungeonDisplay.push_back(ss.str());
+            _dungeonDisplay.push_back(ss.str());
             ss.str("");
         }
+        start += _width;
+        end += _width;
         dungeonHeight ++;
     }
-    // Height
-//     for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
-//         for(int j{0}; j < _height; ++j) {
-//             roomDisplay = _rooms[j]->display();
-//             ss << roomDisplay[i] << " ";
-//         }
-//         dungeonDisplay.push_back(ss.str());
-//         ss.str("");
-//     }
-    for(std::string s : dungeonDisplay) {
-        std::cout << s << std::endl;
-    }
-    return dungeonDisplay;
+
+    return _dungeonDisplay;
 }
 
 

@@ -12,8 +12,8 @@ Monster::Monster(std::string name)
 }
 
 
-AbstractCreature* Monster::clone() const {
-    return new Monster(*this);
+std::shared_ptr<AbstractCreature> Monster::clone() const {
+    return std::make_shared<Monster>(*this);
 }
 
 

@@ -5,7 +5,7 @@ namespace core::creatures {
 
 
 AbstractCreature::AbstractCreature(std::string name)
-    :_name{name}
+    :_name{name}, _boss{false}
 {
 
 }
@@ -17,7 +17,12 @@ std::string AbstractCreature::name() const {
 }
 
 char AbstractCreature::displayCharacter() const {
-    return 'C';
+    return ' ';
 }
-
+void AbstractCreature::setBoss(bool isBoss) {
+    _boss = isBoss;
+}
+bool AbstractCreature::isBoss() {
+    return _boss;
+}
 }

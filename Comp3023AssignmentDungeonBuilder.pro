@@ -18,6 +18,8 @@ SOURCES += \
         Core/dungeon/doorway.cpp \
         Core/dungeon/dungeonlevel.cpp \
         Core/dungeon/dungeonlevelbuilder.cpp \
+        Core/dungeon/magical/alchemistslaboratory.cpp \
+        Core/dungeon/magical/enchantedlibrary.cpp \
         Core/dungeon/magical/magicwall.cpp \
         Core/dungeon/wall.cpp \
         Core/items/consumable.cpp \
@@ -49,6 +51,8 @@ HEADERS += \
     Core/dungeon/doorway.h \
     Core/dungeon/dungeonlevel.h \
     Core/dungeon/dungeonlevelbuilder.h \
+    Core/dungeon/magical/alchemistslaboratory.h \
+    Core/dungeon/magical/enchantedlibrary.h \
     Core/dungeon/magical/magicwall.h \
     Core/dungeon/wall.h \
     Core/items/item.h \

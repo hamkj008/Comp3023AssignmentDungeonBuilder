@@ -1,10 +1,13 @@
-#include "menuinterface.h"
-#include "game.h"
 #include <string>
 #include <sstream>
 
-namespace core {
+#include "menuinterface.h"
+#include "game.h"
+#include "Core/dungeon/dungeonlevelbuilder.h"
+#include "Core/dungeon/basic/basicdungeonlevelbuilder.h"
+#include "Core/dungeon/magical/magicaldungeonlevelbuilder.h"
 
+namespace core {
 
 MenuInterface::MenuInterface(std::ostream &display, std::istream &input)
     : _display{&display}, _input{&input}
@@ -16,8 +19,8 @@ MenuInterface::MenuInterface(std::ostream &display, std::istream &input)
 void MenuInterface::displayWelcome(std::string author, std::string title){
     std::ostringstream stringstream;
     stringstream << "\nWelcome to: " << title << "\n"
-      << "\t\t" << "developed by " << author << "\n"
-      << "\t COMP3023 Software Development with C++\n";
+                 << "\t\t" << "developed by " << author << "\n"
+                 << "\t COMP3023 Software Development with C++\n";
     *_display << stringstream.str();
 
 
@@ -34,9 +37,9 @@ void MenuInterface::run() {
 
     do{
         *_display << "\nWhat would you like to do?\n"
-                    "\t(g)enerate the example level\n"
-                    "\t(r)andom dungeon level\n"
-                    "\t(q)uit\n";
+                     "\t(g)enerate the example level\n"
+                     "\t(r)andom dungeon level\n"
+                     "\t(q)uit\n";
 
 
         char selection{};
@@ -47,84 +50,116 @@ void MenuInterface::run() {
         int height{};
 
         switch(selection) {
-            case('g'):
-                conditions = true;
-                Game::instance()->createExampleLevel();
-                break;
+        case('g'):
+            conditions = true;
+            Game::instance()->createExampleLevel();
+            Game::instance()->displayLevel(*_display);
+            break;
 
-            case('r'): {
-                conditions = true;
+        case('r'): {
+            conditions = true;
 
-                *_display << "\nWhat would you like to call the level? \n";
-                *_input >> levelName;
+            *_display << "\nWhat would you like to call the level? \n";
+            *_input >> levelName;
 
+            do {
+                bool rowCheck;
                 do {
-                    bool rowCheck;
-                    do {
-                        rowCheck = true;
-                        std::string size{};
+                    rowCheck = true;
+                    std::string size{};
 
-                        *_display << "\nHow many rows in *" << levelName << "*? \n";
-                        *_input >> size;
+                    *_display << "\nHow many rows in *" << levelName << "*? \n";
+                    *_input >> size;
 
-                        std::stringstream ss{size};
-                        ss >> width;
+                    std::stringstream ss{size};
+                    ss >> width;
 
-                        if(width < 1 or width >  4) {
-                           *_display << "\nYou have not entered a number in the valid range. Please choose between 1 - 4";
-                            rowCheck = false;
-                            ss.clear();
-                        }
-                    } while(rowCheck == false);
-
-                    bool colCheck;
-                    do {
-                         colCheck = true;
-                         std::string size{};
-
-                         *_display << "\nHow many columns in *" << levelName << "*? \n";
-                         *_input >> size;
-
-                         std::stringstream ss{size};
-                         ss >> height;
-
-                         if(height < 1 or height > 4) {
-                            *_display << "\nYou have not entered a number in the valid range. Please choose between 1 - 4";
-                             colCheck = false;
-                             ss.clear();
-                          }
-
-                    } while(colCheck == false);
-
-                Game::instance()->createRandomLevel(levelName, width, height);
-               } while(conditions == true);
-            }
-            case('q'): {
-                conditions = true;
-                char quit{};
-                bool termsMet{true};
-                do {
-                    *_display << "\nAre you sure you want to quit?\n";
-                    *_input >> quit;
-                    switch(quit) {
-                        case('n'):
-                            termsMet = true;
-                            run();
-                            break;
-                        case('y'):
-                            termsMet = true;
-                            *_display << "\nGoodbye!\n";
-                            break;
-                        default:
-                            *_display << "You did not enter a valid choice. Please try again.\n";
-                            termsMet = false;
-                            break;
+                    if(width < 1 or width >  4) {
+                        *_display << "\nYou have not entered a number in the valid range. Please choose between 1 - 4";
+                        rowCheck = false;
+                        ss.clear();
                     }
-                } while(termsMet == false);
-             }  break;
-            default:
-                *_display << "You did not enter a valid choice. Please try again.\n";
-                conditions = false;
+                } while(rowCheck == false);
+
+                bool colCheck;
+                do {
+                    colCheck = true;
+                    std::string size{};
+
+                    *_display << "\nHow many columns in *" << levelName << "*? \n";
+                    *_input >> size;
+
+                    std::stringstream ss{size};
+                    ss >> height;
+
+                    if(height < 1 or height > 4) {
+                        *_display << "\nYou have not entered a number in the valid range. Please choose between 1 - 4";
+                        colCheck = false;
+                        ss.clear();
+                    }
+                } while(colCheck == false);
+
+                bool typeCheck;
+                do {
+                    typeCheck = true;
+                    char type{};
+
+                    *_display << "\nWhat type of dungeon level is it? (b)asic or (m)agical\n";
+                    *_input >> type;
+
+                    switch(type) {
+                    case('b'): {
+                        typeCheck = true;
+                        core::dungeon::basic::BasicDungeonLevelBuilder basicDungeonBuilder{};
+                        Game::instance()->setDungeonType('b');
+                        conditions = false;
+                    }   break;
+                    case('m'): {
+                        typeCheck = true;
+                        core::dungeon::magical::MagicalDungeonLevelBuilder magicDungeonBuilder{};
+                        Game::instance()->setDungeonType('m');
+                        conditions = false;
+                    }   break;
+                    default:
+                        *_display << "You did not enter a valid choice. Please try again.\n";
+                        typeCheck = false;
+                        break;
+                    }
+                } while(typeCheck == false);
+            } while(conditions == true);
+
+            Game::instance()->createRandomLevel(levelName, width, height);
+            Game::instance()->displayLevel(*_display);
+
+            break;
+        }
+        case('q'): {
+            conditions = true;
+            char quit{};
+            bool termsMet{true};
+            do {
+                *_display << "\nAre you sure you want to quit?\n";
+                *_input >> quit;
+                switch(quit) {
+                case('n'):
+                    termsMet = true;
+                    run();
+                    break;
+                case('y'):
+                    termsMet = true;
+                    *_display << "\nGoodbye!\n";
+                    break;
+                default:
+                    *_display << "You did not enter a valid choice. Please try again.\n";
+                    termsMet = false;
+                    break;
+                }
+            } while(termsMet == false);
+        }
+        default:
+            *_display << "You did not enter a valid choice. Please try again.\n";
+            conditions = false;
+            break;
         }
     } while(conditions == false);
 }

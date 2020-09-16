@@ -13,7 +13,7 @@ void DungeonLevelBuilder::buildDungeonLevel(std::string name, int width, int hei
 }
 
 // Room type chosen randomly
-std::shared_ptr<Room> DungeonLevelBuilder::buildRoom(int &id) {
+std::shared_ptr<Room> DungeonLevelBuilder::buildRoom(int id) {
 
 }
 
@@ -33,11 +33,11 @@ void DungeonLevelBuilder::buildExit(std::shared_ptr<Room> &room, Room::Direction
 void DungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
 
 }
-void DungeonLevelBuilder::buildCreature(std::shared_ptr<Room> &room) {
+void DungeonLevelBuilder::buildCreature(std::shared_ptr<Room> &room, bool isBoss) {
 
 }
-DungeonLevel DungeonLevelBuilder::getDungeonLevel() {
-
+std::shared_ptr<DungeonLevel> DungeonLevelBuilder::getDungeonLevel() {
+    return _dungeonLevel;
 }
 
 }

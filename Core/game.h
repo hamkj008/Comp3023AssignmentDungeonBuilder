@@ -21,18 +21,19 @@ public:
     static Game* instance();
 
 
-    void setDungeonType(core::dungeon::DungeonLevelBuilder);
+    void setDungeonType(char choice);
     void createExampleLevel();
     void createRandomLevel(std::string &name, int &width, int &height);
-    void displayLevel(std::ostream display);
+    void displayLevel(std::ostream &display);
     double randomDouble();
 
 
 private:
     Game();
 
-
     static Game *_theInstance;
+
+    std::shared_ptr<core::dungeon::DungeonLevelBuilder> _DB;
 
     std::mt19937 _randomGenerator{uint32_t(time(nullptr))}; //!< Mersenne Twister random number generator seeded by current time
     std::uniform_real_distribution<double> _realDistribution{0.0, 1.0}; //!< For random numbers between 0.0 & 1.0

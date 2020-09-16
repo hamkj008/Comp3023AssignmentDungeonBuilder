@@ -19,7 +19,7 @@ public:
 
 
     bool addRoom(std::shared_ptr<Room> &room);
-    Room* retrieveRoom(int &id);
+    std::shared_ptr<Room> retrieveRoom(int id);
     int width();
     int height();
     int numberOfRooms();
@@ -33,7 +33,7 @@ private:
     int _height;
 
     std::vector<std::string> _dungeonDisplay;
-    std::vector<std::shared_ptr<Room>> _rooms;
+    std::vector<std::shared_ptr<Room>> _roomList;
 };
 }
 #endif // DUNGEONLEVEL_H

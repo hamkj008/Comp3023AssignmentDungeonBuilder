@@ -9,8 +9,8 @@ Weapon::Weapon(std::string name)
 }
 
 
-Item* Weapon::clone() {
-    return new Weapon(*this);
+std::shared_ptr<Item> Weapon::clone() {
+    return std::make_shared<Weapon>(*this);
 }
 
 

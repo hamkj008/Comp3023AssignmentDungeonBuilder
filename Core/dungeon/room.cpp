@@ -11,9 +11,8 @@
 namespace core::dungeon {
 
 
-Room::Room(int &id)
-    : _id{id},
-      _description{}
+Room::Room(int id)
+    : _id{id}, _description{}, _creature{}, _item{}
 
 {
     std::cout << "Room created" << std::endl;
@@ -53,16 +52,60 @@ std::array<std::string, 5> Room::display() {
     std::string top{ss.str()};
     ss.str("");
 
+    // set mid1
     ss << _eastEdge->displayCharacter();
     for(int i = 0; i < 9; ++i) {
         ss << " ";
     }
     ss << _westEdge->displayCharacter();
     std::string mid1{ss.str()};
-    std::string mid2{ss.str()};
-    std::string mid3{ss.str()};
-
     ss.str("");
+
+    // set mid2
+    std::stringstream mid2sstream{};
+    char itemDisplay{};
+    if(_item == nullptr) {
+        itemDisplay = ' ';
+    }
+    else {
+        itemDisplay = _item->displayCharacter();
+    }
+
+    char creatureDisplay{};
+    if(_creature == nullptr) {
+        creatureDisplay = ' ';
+    }
+    else {
+        creatureDisplay = _creature->displayCharacter();
+    }
+
+    char bossDisplay{};
+    if(_creature == nullptr) {
+        bossDisplay = ' ';
+    }
+    else if(_creature->isBoss() == true) {
+        bossDisplay = '*';
+    }
+    else {
+        bossDisplay = ' ';
+    }
+
+    mid2sstream << _eastEdge->displayCharacter() << "   " << creatureDisplay <<
+                  bossDisplay << itemDisplay << "   " << _westEdge->displayCharacter();
+
+    std::string mid2{mid2sstream.str()};
+    ss.str("");
+
+
+    ss << _eastEdge->displayCharacter();
+    for(int i = 0; i < 9; ++i) {
+        ss << " ";
+    }
+    ss << _westEdge->displayCharacter();
+    std::string mid3{ss.str()};
+    ss.str("");
+
+    // set bottom
     ss << "+";
     for(int i{0}; i < 9; ++i) {
         if(i == 4) {
@@ -91,22 +134,22 @@ int Room::id() const {
    return _id;
 }
 
-core::items::Item* Room::item() const {
+std::shared_ptr<core::items::Item> Room::item() {
     return _item;
 }
 
 
-void Room::setItem(core::items::Item &newItem) {
-    _item = &newItem;
+void Room::setItem(std::shared_ptr<core::items::Item> &newItem) {
+    _item = newItem;
 }
 
-core::creatures::AbstractCreature* Room::creature() {
+std::shared_ptr<core::creatures::AbstractCreature> Room::creature() {
 
     return _creature;
 }
 
-void Room::setCreature(core::creatures::AbstractCreature &newCreature) {
-    _creature = &newCreature;
+void Room::setCreature(std::shared_ptr<core::creatures::AbstractCreature> &newCreature) {
+    _creature = newCreature;
 }
 
 }

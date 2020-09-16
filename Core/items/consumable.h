@@ -12,7 +12,7 @@ class Consumable final : public Item {
 public:
     Consumable(std::string name);
 
-    virtual Item* clone() override;
+    virtual std::shared_ptr<Item> clone() override;
 
 };
 }
