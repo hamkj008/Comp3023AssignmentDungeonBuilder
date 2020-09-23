@@ -12,14 +12,14 @@ class MenuInterface {
 
 public:
     MenuInterface(std::ostream &display, std::istream &input);
-//    ~MenuInterface();
 
 
     void displayWelcome(std::string author, std::string title);
-
     void run();
 
-
+    void mainMenu();
+    void randomDungeonMenu();
+    void dungeonInteractMenu();
 
 private:
     std::ostream *_display;

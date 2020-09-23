@@ -1,18 +1,25 @@
 #include "magicaldungeonlevel.h"
-
+#include <sstream>
 
 namespace core::dungeon::magical {
 
 
 MagicalDungeonLevel::MagicalDungeonLevel(std::string name, int width, int height)
-    : DungeonLevel(name, width, height),
-      _description{"Magic Cave"}
+    : _name{name}, _width{width}, _height{height},
+      _type{"Magic Cave"}
 {
 
 }
 
-std::string MagicalDungeonLevel::description() {
-    return _description;
+std::string MagicalDungeonLevel::description() const {
+    std::stringstream ss;
+    ss << _name <<
+          "Size: " << _width << " x " << _height <<
+          "Type: " << _type;
+
+    std::string description{ss.str()};
+
+    return description;
 }
 
 

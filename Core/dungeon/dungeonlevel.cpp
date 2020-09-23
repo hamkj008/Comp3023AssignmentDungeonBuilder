@@ -45,15 +45,8 @@ int DungeonLevel::numberOfRooms() {
 std::string DungeonLevel::name() {
     return _name;
 }
+std::string  DungeonLevel::description() const {
 
-std::string DungeonLevel::description() {
-    std::stringstream ss;
-    ss << _name <<
-          "Size: " << _width << " x " << _height <<
-          "Type: ";
-    std::string description{ss.str()};
-
-    return description;
 }
 
 std::vector<std::string> DungeonLevel::display() {
@@ -71,12 +64,20 @@ std::vector<std::string> DungeonLevel::display() {
             // appends each line in the row together depending on the width
             for(int j = start; j < end; ++j) {
                 roomDisplay = _roomList[j]->display();
-                ss << roomDisplay[i] << " ";
-
+                ss << roomDisplay[i];
+                if(i == 2) {
+                    ss << "--";
+                }
+                else {
+                    ss << "  ";
+                }
             }
             _dungeonDisplay.push_back(ss.str());
             ss.str("");
         }
+        ss << "+    |    +";
+        _dungeonDisplay.push_back(ss.str());
+        ss.str("");
         start += _width;
         end += _width;
         dungeonHeight ++;

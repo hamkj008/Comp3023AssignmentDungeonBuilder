@@ -16,7 +16,7 @@ std::string LockedDoor::description() const {
     return _description;
 }
 
-char LockedDoor::displayCharacter() const {
+char LockedDoor::displayCharacter() {
     return _character;
 }
 
@@ -24,5 +24,11 @@ bool LockedDoor::isPassage() const {
     return _passage;
 
 }
+bool LockedDoor::isEntrance() {
+    return false;
+}
 
+bool LockedDoor::isExit() {
+    return false;
+}
 }

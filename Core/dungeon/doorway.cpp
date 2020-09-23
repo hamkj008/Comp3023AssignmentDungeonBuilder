@@ -12,18 +12,20 @@ Doorway::Doorway()
 Doorway::~Doorway() {
 }
 
-void Doorway::connect(Doorway &opposite) {
+void Doorway::connect(std::shared_ptr<Doorway> &opposite) {
+    if(this->getDirection() == Room::Direction::South) {
+        opposite->setDirection(Room::Direction::North);
+    }
+    else if(this->getDirection() == Room::Direction::East) {
+        opposite->setDirection(Room::Direction::West);
+    }
 
 }
-
 bool Doorway::isEntrance() {
-    bool entrance{true};
-    return entrance;
-}
 
+}
 bool Doorway::isExit() {
-    bool exit{true};
-    return exit;
+
 }
 
 }

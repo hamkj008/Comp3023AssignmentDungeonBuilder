@@ -3,10 +3,13 @@
 #include "Core/dungeon/basic/rockchamber.h"
 #include "Core/dungeon/basic/quartzchamber.h"
 #include "Core/creatures/monster.h"
-#include "Core/items/item.h"
 #include "Core/items/weapon.h"
 #include "Core/items/consumable.h"
 #include "Core/game.h"
+#include "Core/dungeon/doorway.h"
+#include "Core/dungeon/common/onewaydoor.h"
+#include "Core/dungeon/common/opendoorway.h"
+#include "Core/dungeon/basic/rockwall.h"
 
 
 namespace core::dungeon::basic {
@@ -54,8 +57,8 @@ void BasicDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, in
 
    std::cout << "number of rooms " << _dungeonLevel->numberOfRooms() << std::endl;
 
-   int i{0};
-   while(i < _dungeonLevel->numberOfRooms()) {
+   int i{1};
+   while(i <= _dungeonLevel->numberOfRooms()) {
        std::shared_ptr<Room> room = buildRoom(i);
        _dungeonLevel->addRoom(room);
        std::cout << "after room" << std::endl;
@@ -74,19 +77,40 @@ std::shared_ptr<Room> BasicDungeonLevelBuilder::buildRoom(int id) {
     else {
         room = std::make_shared<QuartzChamber>(id);
     }
+
     return room;
 }
 
 void BasicDungeonLevelBuilder::buildDoorway(std::shared_ptr<Room> &origin, std::shared_ptr<Room> &destination, Room::Direction direction, MoveConstraints constraints) {
+    double randomDouble = Game::instance()->randomDouble();
+    std::shared_ptr<Doorway> doorway;
 
+    if(randomDouble > 0.2) {
+        doorway = std::make_shared<core::dungeon::common::OpenDoorway>();
+    }
+    else {
+        doorway = std::make_shared<core::dungeon::common::OneWayDoor>(false, false, true);
+    }
+
+    std::shared_ptr<Doorway> opposite = std::make_shared<core::dungeon::common::OpenDoorway>();
+    doorway->setDirection(direction);
+    doorway->connect(opposite);
+
+    std::shared_ptr<RoomEdge> edge = doorway;
+    origin->setEdge(direction, edge);
+    destination->setEdge(direction, edge);
 }
 
 void BasicDungeonLevelBuilder::buildEntrance(std::shared_ptr<Room> &room, Room::Direction direction) {
-
+    std::shared_ptr<Doorway> entrance = std::make_shared<core::dungeon::common::OneWayDoor>(true, false, false);
+    std::shared_ptr<RoomEdge> edge = entrance;
+    room->setEdge(direction, edge);
 }
 
 void BasicDungeonLevelBuilder::buildExit(std::shared_ptr<Room> &room, Room::Direction direction) {
-
+    std::shared_ptr<Doorway> exit = std::make_shared<core::dungeon::common::OneWayDoor>(false, true, false);
+    std::shared_ptr<RoomEdge> edge = exit;
+    room->setEdge(direction, edge);
 }
 
 // Select a random item from the list

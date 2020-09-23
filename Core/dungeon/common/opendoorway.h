@@ -6,16 +6,18 @@
 namespace core::dungeon::common {
 
 
-class OpenDoorway : public Doorway, RoomEdge
-
+class OpenDoorway : public Doorway
 {
 public:
     OpenDoorway();
 
 
     virtual std::string description() const override;
-    virtual char displayCharacter() const override;
+    virtual char displayCharacter() override;
     virtual bool isPassage() const override;
+
+    bool isEntrance() override;
+    bool isExit() override;
 
 private:
     std::string _description;

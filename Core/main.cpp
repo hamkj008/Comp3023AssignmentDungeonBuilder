@@ -3,7 +3,7 @@
 #include <array>
 
 #include "Core/menuinterface.h"
-
+#include "Core/dungeon/common/onewaydoor.h"
 
 int main()
 {
@@ -11,7 +11,6 @@ int main()
     menu.displayWelcome("Kieran Hambledon", "Dungeon Builder");
 
     menu.run();
-
 
 
     return 0;

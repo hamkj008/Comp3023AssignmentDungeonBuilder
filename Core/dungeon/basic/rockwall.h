@@ -7,14 +7,16 @@
 namespace core::dungeon::basic {
 
 
-class RockWall : public Wall, RoomEdge
+class RockWall : public Wall
 {
 public:
     RockWall();
 
 
     virtual std::string description() const override;
+    virtual char displayCharacter() override;
 
+    virtual bool isPassage() const override;
 
 };
 }

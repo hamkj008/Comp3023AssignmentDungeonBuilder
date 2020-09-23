@@ -6,19 +6,23 @@
 namespace core::dungeon::common {
 
 
-class OneWayDoor : public Doorway, RoomEdge
+class OneWayDoor : public Doorway
 {
 public:
-    OneWayDoor();
-
+    OneWayDoor(bool entrance, bool exit, bool passage);
 
     virtual std::string description() const override;
-    virtual char displayCharacter() const override;
+    virtual char displayCharacter() override;
     virtual bool isPassage() const override;
+
+    bool isEntrance() override;
+    bool isExit() override;
 
 private:
     std::string _description;
     char _character;
+    bool _entrance;
+    bool _exit;
     bool _passage;
 };
 }

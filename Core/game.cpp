@@ -7,7 +7,6 @@
 #include "Core/dungeon/magical/magicaldungeonlevelbuilder.h"
 #include "Core/dungeon/room.h"
 
-
 namespace core {
 
 
@@ -31,33 +30,50 @@ Game* Game::instance() {
 
 
 void Game::setDungeonType(char choice) {
-    if(choice == 'b') {
-        _DB = std::make_shared<core::dungeon::basic::BasicDungeonLevelBuilder>();
-    }
-    else if(choice == 'm') {
-        _DB = std::make_shared<core::dungeon::magical::MagicalDungeonLevelBuilder>();
-    }
+        if(choice == 'b') {
+            _DB = std::make_shared<core::dungeon::basic::BasicDungeonLevelBuilder>();
+        }
+        else if(choice == 'm') {
+            _DB = std::make_shared<core::dungeon::magical::MagicalDungeonLevelBuilder>();
+        }
 }
 
 
 void Game::createExampleLevel(){
     _DB = std::make_shared<core::dungeon::basic::BasicDungeonLevelBuilder>();
 
-    _DB->buildDungeonLevel("Example Level", 3, 3);
+    _DB->buildDungeonLevel("Example Dungeon Level", 3, 3);
 
+    std::shared_ptr<core::dungeon::Room> room1 = _DB->getDungeonLevel()->retrieveRoom(1);
+    std::shared_ptr<core::dungeon::Room> room2 = _DB->getDungeonLevel()->retrieveRoom(2);
     std::shared_ptr<core::dungeon::Room> room3 = _DB->getDungeonLevel()->retrieveRoom(3);
+    std::shared_ptr<core::dungeon::Room> room4 = _DB->getDungeonLevel()->retrieveRoom(4);
+    std::shared_ptr<core::dungeon::Room> room5 = _DB->getDungeonLevel()->retrieveRoom(5);
+    std::shared_ptr<core::dungeon::Room> room6 = _DB->getDungeonLevel()->retrieveRoom(6);
+    std::shared_ptr<core::dungeon::Room> room7 = _DB->getDungeonLevel()->retrieveRoom(7);
+    std::shared_ptr<core::dungeon::Room> room8 = _DB->getDungeonLevel()->retrieveRoom(8);
+    std::shared_ptr<core::dungeon::Room> room9 = _DB->getDungeonLevel()->retrieveRoom(9);
+
+
+    _DB->buildEntrance(room1, core::dungeon::Room::Direction::North);
+
+    _DB->buildDoorway(room1, room2, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    _DB->buildDoorway(room1, room4, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    _DB->buildDoorway(room2, room3, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    _DB->buildDoorway(room2, room5, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    _DB->buildDoorway(room3, room6, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    _DB->buildDoorway(room4, room7, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+
     _DB->buildCreature(room3, false);
     _DB->buildItem(room3);
 
-    std::shared_ptr<core::dungeon::Room> room5 = _DB->getDungeonLevel()->retrieveRoom(5);
     _DB->buildCreature(room5, false);
     _DB->buildItem(room5);
 
-    std::shared_ptr<core::dungeon::Room> room7 = _DB->getDungeonLevel()->retrieveRoom(7);
     _DB->buildItem(room7);
 
-    std::shared_ptr<core::dungeon::Room> room9 = _DB->getDungeonLevel()->retrieveRoom(9);
     _DB->buildCreature(room9, true);
+    _DB->buildExit(room9, core::dungeon::Room::Direction::East);
 
 }
 
@@ -100,6 +116,7 @@ void Game::createRandomLevel(std::string &name, int &width, int &height) {
 }
 
 void Game::displayLevel(std::ostream &display) {
+
     std::vector<std::string> dungeonStrings = _DB->getDungeonLevel()->display();
 
 

@@ -14,7 +14,7 @@ public:
 
 
     virtual std::string description() const override;
-    virtual char displayCharacter() const override;
+    virtual char displayCharacter() override;
 };
 }
 #endif // MAGICWALL_H

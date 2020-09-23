@@ -14,11 +14,14 @@ public:
     BasicDungeonLevel(std::string name, int width, int height);
 
 
-    std::string description() override;
+    virtual std::string description() const override;
 
 
 private:
-    std::string _description;
+    std::string _name;
+    int _width;
+    int _height;
+    std::string _type;
 
 };
 }

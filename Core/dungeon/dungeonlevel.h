@@ -1,10 +1,9 @@
 #ifndef DUNGEONLEVEL_H
 #define DUNGEONLEVEL_H
 
-#include "room.h"
 #include <string>
 #include <vector>
-
+#include "room.h"
 
 
 namespace core::dungeon {
@@ -15,17 +14,17 @@ class DungeonLevel
 public:
     DungeonLevel();
     DungeonLevel(std::string &name, int &width, int &height);
-    ~DungeonLevel();
+    virtual ~DungeonLevel();
 
 
-    bool addRoom(std::shared_ptr<Room> &room);
-    std::shared_ptr<Room> retrieveRoom(int id);
-    int width();
-    int height();
-    int numberOfRooms();
-    std::string name();
-    virtual std::string description();
-    std::vector<std::string> display();
+    virtual bool addRoom(std::shared_ptr<Room> &room);
+    virtual std::shared_ptr<Room> retrieveRoom(int id);
+    virtual int width();
+    virtual int height();
+    virtual int numberOfRooms();
+    virtual std::string name();
+    virtual std::string description() const = 0;
+    virtual std::vector<std::string> display();
 
 private:
     std::string _name;

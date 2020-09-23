@@ -15,15 +15,14 @@ public:
     virtual ~RoomEdge();
 
     virtual std::string description() const = 0;
-    virtual char displayCharacter() const = 0;
+    virtual char displayCharacter() = 0;
     virtual bool isPassage() const = 0;
 
 
-    void setDirection(Room::Direction direction);
-    Room::Direction getDirection() const;
+    virtual void setDirection(Room::Direction direction);
+    virtual Room::Direction getDirection() const;
 
 private:
-    std::string _description;
     Room::Direction _direction;
 };
 }

@@ -1,30 +1,19 @@
 #include "roomedge.h"
-
+#include <iostream>
 
 namespace core::dungeon {
 
 
 RoomEdge::RoomEdge()
-    : _description{"Room Edge"},
-      _direction{}
+    : _direction{}
 {
-
+//    std::cout << "RoomEdge created" << std::endl;
 }
 RoomEdge::~RoomEdge() {
-
+//    std::cout << "RoomEdge deleted" << std::endl;
 }
 
-std::string RoomEdge::description() const{
-    return _description;
-}
 
-char RoomEdge::displayCharacter() const {
-
-}
-
-bool RoomEdge::isPassage() const {
-    return true;
-}
 
 
 void RoomEdge::setDirection(Room::Direction direction) {
@@ -34,4 +23,6 @@ void RoomEdge::setDirection(Room::Direction direction) {
 Room::Direction RoomEdge::getDirection() const {
     return _direction;
 }
+
+
 }
