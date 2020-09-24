@@ -27,26 +27,20 @@ std::string Room::description() const {
 }
 
 std::array<std::string, 5> Room::display() {
-    std::stringstream ss{};
+    std::stringstream stringstream{};
+    std::array<std::string, 5> roomDisplay{};
 
     // Set top
-    ss << "+";
-    for(std::size_t i{}; i < _northEdge.size(); ++i) {
-        ss << _northEdge[i]->displayCharacter();
-    }
-    ss << "+";
-    std::string top{ss.str()};
-    ss.str("");
+    stringstream << "+----" << _northEdge->displayCharacter() << "----+";
+    roomDisplay[0] = stringstream.str();
+    stringstream.str("");
 
     // set mid1
-    ss << _westEdge[0]->displayCharacter();
-    ss << "         ";
-    ss << _eastEdge[0]->displayCharacter();
-    std::string mid1{ss.str()};
-    ss.str("");
+    stringstream << "|         |";
+    roomDisplay[1] = stringstream.str();
+    stringstream.str("");
 
     // set mid2
-    std::stringstream mid2sstream{};
     char itemDisplay{};
     if(_item == nullptr) {
         itemDisplay = ' ';
@@ -74,35 +68,22 @@ std::array<std::string, 5> Room::display() {
         bossDisplay = ' ';
     }
 
-    mid2sstream << _westEdge[1]->displayCharacter() << "   " << creatureDisplay <<
-                   bossDisplay << itemDisplay << "   " << _eastEdge[1]->displayCharacter();
+    stringstream << _westEdge->displayCharacter() << "   " << creatureDisplay <<
+                   bossDisplay << itemDisplay << "   " << _eastEdge->displayCharacter();
 
-    std::string mid2{mid2sstream.str()};
-    ss.str("");
+    roomDisplay[2] = stringstream.str();
+    stringstream.str("");
 
 
-    ss << _westEdge[2]->displayCharacter();
-    ss << "         ";
-    ss << _eastEdge[2]->displayCharacter();
-    std::string mid3{ss.str()};
-    ss.str("");
+    // set mid3
+    stringstream << "|         |";
+    roomDisplay[3] = stringstream.str();
+    stringstream.str("");
 
     // set bottom
-    ss << "+";
-    for(std::size_t i{}; i < _southEdge.size(); ++i) {
-        ss << _southEdge[i]->displayCharacter();
-    }
-    ss << "+";
-    std::string bottom{ss.str()};
-    ss.str("");
-
-    std::array<std::string, 5> roomDisplay{};
-
-    roomDisplay[0] = top;
-    roomDisplay[1] = mid1;
-    roomDisplay[2] = mid2;
-    roomDisplay[3] = mid3;
-    roomDisplay[4] = bottom;
+    stringstream << "+----" << _southEdge->displayCharacter() << "----+";
+    roomDisplay[4] = stringstream.str();
+    stringstream.str("");
 
     return roomDisplay;
 }
@@ -129,55 +110,63 @@ void Room::setCreature(std::shared_ptr<core::creatures::AbstractCreature> &newCr
 }
 
 void Room::setEdge(Room::Direction direction, std::shared_ptr<RoomEdge> &roomEdge) {
-    roomEdge->setDirection(direction);
 
-    std::shared_ptr<Wall> wall = std::dynamic_pointer_cast<Wall>(roomEdge);
-    if(wall == nullptr) {
-        if(direction == Room::Direction::North) {
-            _northEdge[4] = roomEdge;
-        }
-        else if(direction == Room::Direction::South) {
-            _southEdge[4] = roomEdge;
-        }
-        else if(direction == Room::Direction::East) {
-            _eastEdge[1] = roomEdge;
-        }
-        else if(direction == Room::Direction::West) {
-            _westEdge[1] = roomEdge;
-        }
+    if(direction == Room::Direction::North) {
+        _northEdge = roomEdge;
+        _northEdge->setDirection(Room::Direction::North);
+    }
+    else if(direction == Room::Direction::South) {
+        _southEdge = roomEdge;
+        _southEdge->setDirection(Room::Direction::South);
+    }
+    else if(direction == Room::Direction::East) {
+        _eastEdge = roomEdge;
+        _eastEdge->setDirection(Room::Direction::East);
+    }
+    else if(direction == Room::Direction::West) {
+        _westEdge = roomEdge;
+        _westEdge->setDirection(Room::Direction::West);
+    }
+
+}
+std::shared_ptr<RoomEdge> Room::getEdge(Room::Direction direction) {
+
+    if(direction == Room::Direction::North) {
+        return _northEdge;
+    }
+    else if(direction == Room::Direction::South) {
+        return _southEdge;
+    }
+    else if(direction == Room::Direction::East) {
+        return _eastEdge;
     }
     else {
-        if(direction == Room::Direction::North) {
-            for(std::size_t i{0}; i < _northEdge.size(); ++i) {
-                if(_northEdge[i] == nullptr) {
-                    _northEdge[i] = roomEdge;
-                    break;
-                }
-            }
-        }
-        else if(direction == Room::Direction::South) {
-            for(std::size_t i{0}; i < _southEdge.size(); ++i) {
-                if(_southEdge[i] == nullptr) {
-                    _southEdge[i] = roomEdge;
-                }
-            }
-        }
-        else if(direction == Room::Direction::East) {
-            for(std::size_t i{0}; i < _eastEdge.size(); ++i) {
-                if(_eastEdge[i] == nullptr) {
-                    _eastEdge[i] = roomEdge;
-                }
-            }
-        }
-        else if(direction == Room::Direction::West) {
-            for(std::size_t i{0}; i < _westEdge.size(); ++i) {
-                if(_westEdge[i] == nullptr) {
-                    _westEdge[i] = roomEdge;
-                }
-            }
-        }
+        return _westEdge;
     }
 }
 
+std::ostream& Room::operator <<(std::ostream &display) {
+    display << "\nRoom *" << id() << "* is...\n"
+           << description()
+           << "\nTo the NORTH is ";
+    getEdge(Room::Direction::North)->operator<<(display);
+    display << "\nTo the SOUTH is ";
+    getEdge(Room::Direction::South)->operator<<(display);
+    display << "\nTo the EAST is ";
+    getEdge(Room::Direction::East)->operator<<(display);
+    display << "\nTo the WEST is ";
+    getEdge(Room::Direction::West)->operator<<(display);
+
+    if(creature() != nullptr) {
+        display << "\n";
+        _creature->operator<<(display);
+    }
+    if(item() != nullptr) {
+        display << "\n";
+        _item->operator<<(display);
+    }
+    display << "\n";
+    return display;
+}
 
 }

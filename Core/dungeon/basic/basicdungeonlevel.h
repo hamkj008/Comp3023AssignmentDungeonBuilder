@@ -11,16 +11,13 @@ class BasicDungeonLevel : public DungeonLevel
 {
 public:
 
-    BasicDungeonLevel(std::string name, int width, int height);
+    BasicDungeonLevel(std::string &name, int &width, int &height);
 
 
     virtual std::string description() const override;
 
 
 private:
-    std::string _name;
-    int _width;
-    int _height;
     std::string _type;
 
 };

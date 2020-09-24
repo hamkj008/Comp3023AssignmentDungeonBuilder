@@ -24,5 +24,7 @@ Room::Direction RoomEdge::getDirection() const {
     return _direction;
 }
 
+std::ostream& RoomEdge::operator <<(std::ostream &display) {
 
+}
 }

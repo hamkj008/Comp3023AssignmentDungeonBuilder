@@ -4,8 +4,8 @@
 namespace core::dungeon::basic {
 
 
-BasicDungeonLevel::BasicDungeonLevel(std::string name, int width, int height)
-    : _name{name}, _width{width}, _height{height},
+BasicDungeonLevel::BasicDungeonLevel(std::string &name, int &width, int &height)
+    : DungeonLevel(name,width, height),
       _type{"Dark Cave (Basic Dungeon)"}
 {
 
@@ -13,9 +13,9 @@ BasicDungeonLevel::BasicDungeonLevel(std::string name, int width, int height)
 
 std::string BasicDungeonLevel::description() const {
     std::stringstream ss;
-    ss << _name <<
-          "Size: " << _width << " x " << _height <<
-          "Type: " << _type;
+    ss << "\n" << _name <<
+    "\nSize: " << _width << " x " << _height <<
+    "\nType: " << _type << std::endl;
 
     std::string description{ss.str()};
 

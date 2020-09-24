@@ -11,22 +11,14 @@ QuartzChamber::QuartzChamber(int &id)
 {
     std::cout << "in quartzChamber constructor" << std::endl;
 
-    for(std::size_t i{0}; i < _northEdge.size(); ++i) {
-        std::shared_ptr<RoomEdge> wall = std::make_shared<core::dungeon::basic::RockWall>();
-        setEdge(Room::Direction::North, wall);
-    }
-    for(std::size_t i{0}; i < _eastEdge.size(); ++i) {
-        std::shared_ptr<RoomEdge> wall = std::make_shared<core::dungeon::basic::RockWall>();
-        setEdge(Room::Direction::East, wall);
-    }
-    for(std::size_t i{0}; i < _westEdge.size(); ++i) {
-        std::shared_ptr<RoomEdge> wall = std::make_shared<core::dungeon::basic::RockWall>();
-        setEdge(Room::Direction::West, wall);
-    }
-    for(std::size_t i{0}; i < _southEdge.size(); ++i) {
-        std::shared_ptr<RoomEdge> wall = std::make_shared<core::dungeon::basic::RockWall>();
-        setEdge(Room::Direction::South, wall);
-    }
+    _northEdge = std::make_shared<RockWall>();
+    _northEdge->setDirection(Room::Direction::North);
+    _southEdge = std::make_shared<RockWall>();
+    _southEdge->setDirection(Room::Direction::South);
+    _eastEdge = std::make_shared<RockWall>();
+    _eastEdge->setDirection(Room::Direction::East);
+    _westEdge = std::make_shared<RockWall>();
+    _westEdge->setDirection(Room::Direction::West);
 }
 
 

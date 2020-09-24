@@ -1,5 +1,5 @@
 #include "abstractcreature.h"
-
+#include <iostream>
 
 namespace core::creatures {
 
@@ -24,5 +24,9 @@ void AbstractCreature::setBoss(bool isBoss) {
 }
 bool AbstractCreature::isBoss() {
     return _boss;
+}
+
+std::ostream& AbstractCreature::operator <<(std::ostream &display) {
+    return display << "There is a " << name() << " to fight.";
 }
 }

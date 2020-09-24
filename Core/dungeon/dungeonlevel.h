@@ -12,7 +12,6 @@ namespace core::dungeon {
 class DungeonLevel
 {
 public:
-    DungeonLevel();
     DungeonLevel(std::string &name, int &width, int &height);
     virtual ~DungeonLevel();
 
@@ -26,11 +25,14 @@ public:
     virtual std::string description() const = 0;
     virtual std::vector<std::string> display();
 
-private:
+    std::ostream& operator <<(std::ostream &display);
+
+protected:
     std::string _name;
     int _width;
     int _height;
 
+private:
     std::vector<std::string> _dungeonDisplay;
     std::vector<std::shared_ptr<Room>> _roomList;
 };

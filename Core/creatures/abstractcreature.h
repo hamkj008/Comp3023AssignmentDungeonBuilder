@@ -21,6 +21,8 @@ public:
     virtual void setBoss(bool boss);
     virtual bool isBoss();
 
+    std::ostream& operator <<(std::ostream &display);
+
 private:
     std::string _name;
     char _displayCharacter;

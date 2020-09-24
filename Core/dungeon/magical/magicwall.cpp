@@ -1,5 +1,5 @@
 #include "magicwall.h"
-
+#include <sstream>
 
 namespace core::dungeon::magical {
 
@@ -18,11 +18,14 @@ char MagicWall::displayCharacter() {
         return '~';
     }
     else if(this->getDirection() == Room::Direction::East){
-        return '{';
+        return '}';
     }
     else {
-        return '}';
+        return '{';
     }
 }
 
+std::ostream& MagicWall::operator <<(std::ostream &display) {
+    return display << "a " << description();
+}
 }

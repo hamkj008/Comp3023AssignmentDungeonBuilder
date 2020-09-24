@@ -57,7 +57,7 @@ void MenuInterface::mainMenu(){
 
                 *_display << "Dungeon Level Created! \n";
 
-                dungeonInteractMenu();
+                dungeonViewMenu();
 
                 break;
 
@@ -173,11 +173,11 @@ void MenuInterface::randomDungeonMenu(){
     } while(conditions == true);
 
     Game::instance()->createRandomLevel(levelName, width, height);
-    dungeonInteractMenu();
+    dungeonViewMenu();
     Game::instance()->displayLevel(*_display);
 }
 
-void MenuInterface::dungeonInteractMenu() {
+void MenuInterface::dungeonViewMenu() {
     bool conditions = true;
     char selection{};
     do {
@@ -191,11 +191,13 @@ void MenuInterface::dungeonInteractMenu() {
     switch(selection) {
         case('d'):
             conditions = true;
-            *_display << Game::instance()->_DB->getDungeonLevel()->description();
+            Game::instance()->operator<<(*_display);
+            dungeonExploreMenu();
             break;
 
         case('v'):
             Game::instance()->displayLevel(*_display);
+            dungeonExploreMenu();
             break;
 
         case('r'):
@@ -212,5 +214,41 @@ void MenuInterface::dungeonInteractMenu() {
    }while(conditions == false);
     mainMenu();
 }
+void MenuInterface::dungeonExploreMenu() {
+    bool conditions = true;
+    char selection{};
+    do {
+    *_display << "\nWhat would you like to do?\n"
+                 "\t(d)escribe a room\n"
+                 "\t(r)eturn to the previous menu\n";
 
+    *_input >> selection;
+
+    switch(selection) {
+        case('d'): {
+            conditions = true;
+            std::string dummy{};
+            int roomNum{};
+            *_display << "\nWhich room would you like to describe? (1-"
+                      << Game::instance()->getDungeon()->getDungeonLevel()->numberOfRooms()
+                      << ")\n";
+            *_input >> roomNum;
+            std::stringstream s{};
+            Game::instance()->getDungeon()->getDungeonLevel()->retrieveRoom(roomNum)->operator<<(*_display);
+            dungeonExploreMenu();
+          } break;
+
+        case('r'):
+            conditions = true;
+            *_display << "\nReturning to previous menu.\n";
+            dungeonViewMenu();
+            break;
+
+        default:
+            *_display << "You did not enter a valid choice. Please try again.\n";
+            conditions = false;
+            break;
+        }
+   }while(conditions == false);
+}
 }

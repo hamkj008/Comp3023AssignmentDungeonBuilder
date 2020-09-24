@@ -19,6 +19,8 @@ void Doorway::connect(std::shared_ptr<Doorway> &opposite) {
     else if(this->getDirection() == Room::Direction::East) {
         opposite->setDirection(Room::Direction::West);
     }
+    this->isPassage();
+    opposite->isPassage();
 
 }
 bool Doorway::isEntrance() {

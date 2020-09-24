@@ -24,4 +24,7 @@ char Item::displayCharacter() const {
     return _displayCharacter;
 }
 
+std::ostream& Item::operator <<(std::ostream &display) {
+    return display << "There is a " << name() << " to pick up.";
+}
 }

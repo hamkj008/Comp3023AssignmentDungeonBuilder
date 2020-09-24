@@ -5,7 +5,7 @@ namespace core::dungeon::magical {
 
 
 MagicalDungeonLevel::MagicalDungeonLevel(std::string name, int width, int height)
-    : _name{name}, _width{width}, _height{height},
+    : DungeonLevel(name, width, height),
       _type{"Magic Cave"}
 {
 

@@ -19,6 +19,8 @@ public:
     bool isEntrance() override;
     bool isExit() override;
 
+    std::ostream& operator <<(std::ostream &display) override;
+
 private:
     std::string _description;
     char _character;

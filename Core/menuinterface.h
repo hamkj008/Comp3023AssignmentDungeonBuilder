@@ -19,7 +19,8 @@ public:
 
     void mainMenu();
     void randomDungeonMenu();
-    void dungeonInteractMenu();
+    void dungeonViewMenu();
+    void dungeonExploreMenu();
 
 private:
     std::ostream *_display;

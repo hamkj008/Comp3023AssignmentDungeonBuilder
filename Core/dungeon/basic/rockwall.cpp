@@ -1,5 +1,5 @@
 #include "rockwall.h"
-
+#include <sstream>
 
 namespace core::dungeon::basic {
 
@@ -22,6 +22,10 @@ char RockWall::displayCharacter() {
     }
 }
 bool RockWall::isPassage() const {
-    return true;
+    return false;
+}
+
+std::ostream& RockWall::operator <<(std::ostream &display) {
+    return display << "a " << description();
 }
 }

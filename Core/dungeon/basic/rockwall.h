@@ -18,6 +18,7 @@ public:
 
     virtual bool isPassage() const override;
 
+    std::ostream& operator <<(std::ostream &display) override;
 };
 }
 #endif // ROCKWALL_H

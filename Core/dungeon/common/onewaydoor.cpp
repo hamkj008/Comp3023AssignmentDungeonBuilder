@@ -1,15 +1,15 @@
 #include "onewaydoor.h"
-
+#include <sstream>
 
 namespace core::dungeon::common {
 
 
-OneWayDoor::OneWayDoor(bool entrance, bool exit, bool passage)
+OneWayDoor::OneWayDoor(bool entrance, bool exit)
     : _description{"One-Way Door"},
       _character{},
       _entrance{entrance},
       _exit{exit},
-      _passage{passage}
+      _passage{}
 {
 
 }
@@ -33,10 +33,10 @@ char OneWayDoor::displayCharacter() {
             _character = '^';
         }
         else if(this->getDirection() == Room::Direction::West) {
-            _character = '<';
+            _character = '>';
         }
         else if(this->getDirection() == Room::Direction::East) {
-            _character = '>';
+            _character = '<';
         }
     }
     return _character;
@@ -52,5 +52,9 @@ bool OneWayDoor::isEntrance() {
 
 bool OneWayDoor::isExit() {
     return _exit;
+}
+
+std::ostream& OneWayDoor::operator <<(std::ostream &display) {
+    return display << "a " << description() << " from another chamber";
 }
 }

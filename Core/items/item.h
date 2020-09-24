@@ -16,6 +16,8 @@ public:
     virtual std::string name() const;
     virtual char displayCharacter() const;
 
+    std::ostream& operator <<(std::ostream &display);
+
 private:
     std::string _name;
     char _displayCharacter;

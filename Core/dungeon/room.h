@@ -9,11 +9,10 @@
 #include "Core/items/item.h"
 
 
-
 namespace core::dungeon {
 
 class RoomEdge;
-class Doorway;
+
 
 class Room
 {
@@ -38,14 +37,16 @@ public:
     virtual std::shared_ptr<core::creatures::AbstractCreature> creature();
     virtual void setCreature(std::shared_ptr<core::creatures::AbstractCreature> &newCreature);
 
-    void setEdge(Direction direction, std::shared_ptr<RoomEdge> &roomEdge);
+    virtual void setEdge(Direction direction, std::shared_ptr<RoomEdge> &roomEdge);
+    virtual std::shared_ptr<RoomEdge> getEdge(Room::Direction direction);
 
+    std::ostream& operator <<(std::ostream &display);
 
 protected:
-    std::array<std::shared_ptr<RoomEdge>, 9> _northEdge;
-    std::array<std::shared_ptr<RoomEdge>, 9> _southEdge;
-    std::array<std::shared_ptr<RoomEdge>, 3> _eastEdge;
-    std::array<std::shared_ptr<RoomEdge>, 3> _westEdge;
+    std::shared_ptr<RoomEdge> _northEdge;
+    std::shared_ptr<RoomEdge> _southEdge;
+    std::shared_ptr<RoomEdge> _eastEdge;
+    std::shared_ptr<RoomEdge> _westEdge;
 
 
 private:

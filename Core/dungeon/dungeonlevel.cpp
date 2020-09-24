@@ -45,46 +45,48 @@ int DungeonLevel::numberOfRooms() {
 std::string DungeonLevel::name() {
     return _name;
 }
-std::string  DungeonLevel::description() const {
 
-}
 
 std::vector<std::string> DungeonLevel::display() {
     std::stringstream ss{};
     std::array<std::string, 5> roomDisplay{};
-    std::array<std::string, 5> rDisplay{};
 
     int dungeonHeight{};
     int start{};
     int end = _width;
 
-    while(dungeonHeight < _height) {
-        // Holds the number of lines in the room.
-        for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
-            // appends each line in the row together depending on the width
-            for(int j = start; j < end; ++j) {
-                roomDisplay = _roomList[j]->display();
-                ss << roomDisplay[i];
-                if(i == 2) {
-                    ss << "--";
+    if(_dungeonDisplay.size() == 0) {
+        while(dungeonHeight < _height) {
+            // Holds the number of lines in the room.
+            for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
+                // appends each line in the row together depending on the width
+                for(int j = start; j < end; ++j) {
+                    roomDisplay = _roomList[j]->display();
+                    ss << roomDisplay[i];
+                    if(i == 2) {
+                        ss << "--";
+                    }
+                    else {
+                        ss << "  ";
+                    }
                 }
-                else {
-                    ss << "  ";
-                }
+                _dungeonDisplay.push_back(ss.str());
+                ss.str("");
             }
+            ss << "+    |    +";
             _dungeonDisplay.push_back(ss.str());
             ss.str("");
+            start += _width;
+            end += _width;
+            dungeonHeight ++;
         }
-        ss << "+    |    +";
-        _dungeonDisplay.push_back(ss.str());
-        ss.str("");
-        start += _width;
-        end += _width;
-        dungeonHeight ++;
     }
-
     return _dungeonDisplay;
 }
 
+std::ostream& DungeonLevel::operator <<(std::ostream &display) {
+    return display << description();
+
+}
 
 }

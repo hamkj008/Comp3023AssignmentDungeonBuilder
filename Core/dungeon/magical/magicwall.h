@@ -15,6 +15,8 @@ public:
 
     virtual std::string description() const override;
     virtual char displayCharacter() override;
+
+    std::ostream& operator <<(std::ostream &display) override;
 };
 }
 #endif // MAGICWALL_H

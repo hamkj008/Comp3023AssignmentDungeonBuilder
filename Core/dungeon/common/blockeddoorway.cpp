@@ -1,5 +1,5 @@
 #include "blockeddoorway.h"
-
+#include <sstream>
 
 namespace core::dungeon::common {
 
@@ -30,5 +30,9 @@ bool BlockedDoorway::isEntrance() {
 
 bool BlockedDoorway::isExit() {
     return false;
+}
+
+std::ostream& BlockedDoorway::operator <<(std::ostream &display) {
+    return display << "a " << description() << " to another chamber";
 }
 }

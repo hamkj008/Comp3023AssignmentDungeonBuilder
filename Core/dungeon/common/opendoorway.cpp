@@ -1,5 +1,5 @@
 #include "opendoorway.h"
-
+#include <sstream>
 
 namespace core::dungeon::common {
 
@@ -7,7 +7,7 @@ namespace core::dungeon::common {
 OpenDoorway::OpenDoorway()
     : _description{"Open Doorway"},
       _character{},
-      _passage{true}
+      _passage{}
 {
 
 }
@@ -18,10 +18,10 @@ std::string OpenDoorway::description() const {
 
 char OpenDoorway::displayCharacter() {
     if(this->getDirection() == Room::Direction::North) {
-        _character = 'v';
+        _character = '^';
     }
     else if(this->getDirection() == Room::Direction::South) {
-        _character = '^';
+        _character = 'v';
     }
     else if(this->getDirection() == Room::Direction::West) {
         _character = '<';
@@ -42,5 +42,9 @@ bool OpenDoorway::isEntrance() {
 
 bool OpenDoorway::isExit() {
     return false;
+}
+
+std::ostream& OpenDoorway::operator <<(std::ostream &display) {
+    return display << "an " << description() << " to another chamber";
 }
 }

@@ -1,5 +1,5 @@
 #include "lockeddoor.h"
-
+#include <sstream>
 
 namespace core::dungeon::common {
 
@@ -30,5 +30,9 @@ bool LockedDoor::isEntrance() {
 
 bool LockedDoor::isExit() {
     return false;
+}
+
+std::ostream& LockedDoor::operator <<(std::ostream &display) {
+    return display << "a " << description() << " to another chamber";
 }
 }
