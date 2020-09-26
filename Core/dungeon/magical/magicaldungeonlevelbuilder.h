@@ -11,7 +11,6 @@ namespace core::dungeon::magical {
 class MagicalDungeonLevelBuilder : public DungeonLevelBuilder
 {
 public:
-
     MagicalDungeonLevelBuilder();
 
 

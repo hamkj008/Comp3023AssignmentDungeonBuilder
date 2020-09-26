@@ -25,6 +25,10 @@ char MagicWall::displayCharacter() {
     }
 }
 
+bool MagicWall::isPassage() const {
+    return false;
+}
+
 std::ostream& MagicWall::operator <<(std::ostream &display) {
     return display << "a " << description();
 }

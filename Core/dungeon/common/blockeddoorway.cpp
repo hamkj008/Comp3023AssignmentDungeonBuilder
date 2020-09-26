@@ -20,17 +20,14 @@ char BlockedDoorway::displayCharacter() {
     return _character;
 }
 
+void BlockedDoorway::setPassage(bool passage) {
+    _passage = passage;
+}
+
 bool BlockedDoorway::isPassage() const {
     return _passage;
-
-}
-bool BlockedDoorway::isEntrance() {
-    return false;
 }
 
-bool BlockedDoorway::isExit() {
-    return false;
-}
 
 std::ostream& BlockedDoorway::operator <<(std::ostream &display) {
     return display << "a " << description() << " to another chamber";

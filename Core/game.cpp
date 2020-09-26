@@ -18,12 +18,14 @@ namespace core {
 
 
 Game::Game()
+    : _DB{}
 {
     std::cout << "game created" << std::endl;
 }
 
 Game::~Game() {
     std::cout << "game destroyed" << std::endl;
+    delete _DB;
 }
 
 
@@ -37,18 +39,20 @@ Game* Game::instance() {
 
 
 void Game::setDungeonType(char choice) {
-        if(choice == 'b') {
-            _DB = std::make_shared<core::dungeon::basic::BasicDungeonLevelBuilder>();
-        }
-        else if(choice == 'm') {
-            _DB = std::make_shared<core::dungeon::magical::MagicalDungeonLevelBuilder>();
-        }
+    if(_DB != nullptr) {
+        delete _DB;
+    }
+
+    if(choice == 'b') {
+        _DB = new core::dungeon::basic::BasicDungeonLevelBuilder();
+    }
+    else if(choice == 'm') {
+        _DB = new core::dungeon::magical::MagicalDungeonLevelBuilder();
+    }
 }
 
 
 void Game::createExampleLevel(){
-    _DB = std::make_shared<core::dungeon::basic::BasicDungeonLevelBuilder>();
-
     _DB->buildDungeonLevel("Example Dungeon Level", 3, 3);
 
     std::shared_ptr<core::dungeon::Room> room1 = _DB->getDungeonLevel()->retrieveRoom(1);
@@ -64,77 +68,77 @@ void Game::createExampleLevel(){
     _DB->buildEntrance(room1, core::dungeon::Room::Direction::North);
 
 
-    std::shared_ptr<core::dungeon::RoomEdge> room1door1 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room1->setEdge(core::dungeon::Room::Direction::East, room1door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room1door2 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room1->setEdge(core::dungeon::Room::Direction::South, room1door2);
+    std::shared_ptr<core::dungeon::Doorway> rm1EastDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm1SouthDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    room1->setEdge(core::dungeon::Room::Direction::East, rm1EastDoor);
+    room1->setEdge(core::dungeon::Room::Direction::South, rm1SouthDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room2door1 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room2->setEdge(core::dungeon::Room::Direction::West, room2door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room2door2 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room2->setEdge(core::dungeon::Room::Direction::South, room2door2);
-    std::shared_ptr<core::dungeon::RoomEdge> room2door3 = std::make_shared<core::dungeon::common::BlockedDoorway>();
-    room2->setEdge(core::dungeon::Room::Direction::East, room2door3);
+    std::shared_ptr<core::dungeon::Doorway> rm2WestDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm2SouthDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm2EastDoor = std::make_shared<core::dungeon::common::BlockedDoorway>();
+    room2->setEdge(core::dungeon::Room::Direction::West, rm2WestDoor);
+    room2->setEdge(core::dungeon::Room::Direction::South, rm2SouthDoor);
+    room2->setEdge(core::dungeon::Room::Direction::East, rm2EastDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room3door1 = std::make_shared<core::dungeon::common::BlockedDoorway>();
-    room3->setEdge(core::dungeon::Room::Direction::West, room3door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room3door2 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room3->setEdge(core::dungeon::Room::Direction::South, room3door2);
+    std::shared_ptr<core::dungeon::Doorway> rm3WestDoor = std::make_shared<core::dungeon::common::BlockedDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm3SouthDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    room3->setEdge(core::dungeon::Room::Direction::West, rm3WestDoor);
+    room3->setEdge(core::dungeon::Room::Direction::South, rm3SouthDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room4door1 = std::make_shared<core::dungeon::common::OneWayDoor>(false, false);
-    room4->setEdge(core::dungeon::Room::Direction::North, room4door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room4door2 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room4->setEdge(core::dungeon::Room::Direction::East, room4door2);
-    std::shared_ptr<core::dungeon::RoomEdge> room4door3 = std::make_shared<core::dungeon::common::BlockedDoorway>();
-    room4->setEdge(core::dungeon::Room::Direction::South, room4door3);
+    std::shared_ptr<core::dungeon::Doorway> rm4NorthDoor = std::make_shared<core::dungeon::common::OneWayDoor>(false, false);
+    std::shared_ptr<core::dungeon::Doorway> rm4EastDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm4SouthDoor = std::make_shared<core::dungeon::common::BlockedDoorway>();
+    room4->setEdge(core::dungeon::Room::Direction::North, rm4NorthDoor);
+    room4->setEdge(core::dungeon::Room::Direction::East, rm4EastDoor);
+    room4->setEdge(core::dungeon::Room::Direction::South, rm4SouthDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room5door1 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room5->setEdge(core::dungeon::Room::Direction::North, room5door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room5door2 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room5->setEdge(core::dungeon::Room::Direction::East, room5door2);
-    std::shared_ptr<core::dungeon::RoomEdge> room5door3 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room5->setEdge(core::dungeon::Room::Direction::South, room5door3);
-    std::shared_ptr<core::dungeon::RoomEdge> room5door4 = std::make_shared<core::dungeon::common::OneWayDoor>(false, false);
-    room5->setEdge(core::dungeon::Room::Direction::West, room5door4);
+    std::shared_ptr<core::dungeon::Doorway> rm5NorthDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm5WestDoor = std::make_shared<core::dungeon::common::OneWayDoor>(false, false);
+    std::shared_ptr<core::dungeon::Doorway> rm5SouthDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm5EastDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    room5->setEdge(core::dungeon::Room::Direction::North, rm5NorthDoor);
+    room5->setEdge(core::dungeon::Room::Direction::West, rm5WestDoor);
+    room5->setEdge(core::dungeon::Room::Direction::South, rm5SouthDoor);
+    room5->setEdge(core::dungeon::Room::Direction::East, rm5EastDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room6door1 = std::make_shared<core::dungeon::common::LockedDoor>();
-    room6->setEdge(core::dungeon::Room::Direction::North, room6door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room6door2 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room6->setEdge(core::dungeon::Room::Direction::West, room6door2);
+    std::shared_ptr<core::dungeon::Doorway> rm6NorthDoor = std::make_shared<core::dungeon::common::LockedDoor>();
+    std::shared_ptr<core::dungeon::Doorway> rm6WestDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    room6->setEdge(core::dungeon::Room::Direction::North, rm6NorthDoor);
+    room6->setEdge(core::dungeon::Room::Direction::West, rm6WestDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room7door1 = std::make_shared<core::dungeon::common::LockedDoor>();
-    room7->setEdge(core::dungeon::Room::Direction::East, room7door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room7door2 = std::make_shared<core::dungeon::common::BlockedDoorway>();
-    room7->setEdge(core::dungeon::Room::Direction::North, room7door2);
+    std::shared_ptr<core::dungeon::Doorway> rm7NorthDoor = std::make_shared<core::dungeon::common::BlockedDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm7EastDoor = std::make_shared<core::dungeon::common::LockedDoor>();
+    room7->setEdge(core::dungeon::Room::Direction::North, rm7NorthDoor);
+    room7->setEdge(core::dungeon::Room::Direction::East, rm7EastDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room8door1 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room8->setEdge(core::dungeon::Room::Direction::North, room8door1);
-    std::shared_ptr<core::dungeon::RoomEdge> room8door2 = std::make_shared<core::dungeon::common::LockedDoor>();
-    room8->setEdge(core::dungeon::Room::Direction::West, room8door2);
-    std::shared_ptr<core::dungeon::RoomEdge> room8door3 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room8->setEdge(core::dungeon::Room::Direction::East, room8door3);
+    std::shared_ptr<core::dungeon::Doorway> rm8WestDoor = std::make_shared<core::dungeon::common::LockedDoor>();
+    std::shared_ptr<core::dungeon::Doorway> rm8NorthDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    std::shared_ptr<core::dungeon::Doorway> rm8EastDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    room8->setEdge(core::dungeon::Room::Direction::West, rm8WestDoor);
+    room8->setEdge(core::dungeon::Room::Direction::North, rm8NorthDoor);
+    room8->setEdge(core::dungeon::Room::Direction::East, rm8EastDoor);
 
-    std::shared_ptr<core::dungeon::RoomEdge> room9door1 = std::make_shared<core::dungeon::common::OpenDoorway>();
-    room9->setEdge(core::dungeon::Room::Direction::West, room9door1);
+    std::shared_ptr<core::dungeon::Doorway> rm9WestDoor = std::make_shared<core::dungeon::common::OpenDoorway>();
+    room9->setEdge(core::dungeon::Room::Direction::West, rm9WestDoor);
 
 
-//    _DB->buildDoorway(room1, room2, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
-//    _DB->buildDoorway(room1, room4, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    rm1EastDoor->connect(rm2WestDoor);
+    rm1SouthDoor->connect(rm4NorthDoor);
 
-//    _DB->buildDoorway(room2, room3, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
-//    _DB->buildDoorway(room2, room5, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    rm2SouthDoor->connect(rm5NorthDoor);
+    rm2EastDoor->connect(rm3WestDoor);
 
-//    _DB->buildDoorway(room3, room6, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    rm3SouthDoor->connect(rm6NorthDoor);
 
-//    _DB->buildDoorway(room4, room5, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
-//    _DB->buildDoorway(room4, room7, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    rm4SouthDoor->connect(rm7NorthDoor);
+    rm4EastDoor->connect(rm5WestDoor);
 
-//    _DB->buildDoorway(room5, room8, core::dungeon::Room::Direction::South, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
-//    _DB->buildDoorway(room5, room6, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    rm5SouthDoor->connect(rm8NorthDoor);
+    rm5EastDoor->connect(rm6WestDoor);
 
-//    _DB->buildDoorway(room7, room8, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    rm7EastDoor->connect(rm8WestDoor);
 
-//    _DB->buildDoorway(room8, room9, core::dungeon::Room::Direction::East, core::dungeon::DungeonLevelBuilder::MoveConstraints::OriginImpassable);
+    rm8EastDoor->connect(rm9WestDoor);
 
 
     _DB->buildCreature(room3, false);
@@ -154,37 +158,52 @@ void Game::createRandomLevel(std::string &name, int &width, int &height) {
     _DB->buildDungeonLevel(name, width, height);
 
     int max = _DB->getDungeonLevel()->numberOfRooms();
-    int min = 0;
+    int roomNum = 1;
 
-    double creaturePopChance = Game::instance()->randomDouble();
-    int creatureNum = creaturePopChance * ((max + 1) - min) + min;
-    std::cout << "number of creatures " << creatureNum << std::endl;
+    std::shared_ptr<core::dungeon::Room> room = _DB->getDungeonLevel()->retrieveRoom(roomNum);
+    _DB->buildEntrance(room, core::dungeon::Room::Direction::North);
 
-    double itemPopChance = Game::instance()->randomDouble();
-    int itemNum = itemPopChance * ((max + 1) - min) + min;
-    std::cout << "number of items " << itemNum << std::endl;
+    while(roomNum <= max) {
+        // Build boss room
+        room = _DB->getDungeonLevel()->retrieveRoom(roomNum);
 
-    while(creatureNum != 0) {
         double creatureChance = Game::instance()->randomDouble();
-        int randomRoom = creatureChance * ((max + 1) - min) + min;
-        std::cout << "random range " << randomRoom << std::endl;
-
-        std::shared_ptr<core::dungeon::Room> creatureRoom = _DB->getDungeonLevel()->retrieveRoom(randomRoom);
-        if(creatureRoom->creature() != nullptr) {
-            _DB->buildCreature(creatureRoom, false);
-            creatureNum--;
+        if(creatureChance < 0.4) {
+            if(room->creature() == nullptr) {
+                _DB->buildCreature(room, false);
+            }
         }
-    }
-    while(itemNum != 0) {
+
         double itemChance = Game::instance()->randomDouble();
-        int randomRoom = itemChance * ((max + 1) - min) + min;
-        std::cout << "random range " << randomRoom << std::endl;
-
-        std::shared_ptr<core::dungeon::Room> itemRoom = _DB->getDungeonLevel()->retrieveRoom(randomRoom);
-        if(itemRoom->item() != nullptr) {
-            _DB->buildItem(itemRoom);
-            itemNum--;
+        if(itemChance < 0.4) {
+            if(room->item() == nullptr) {
+                _DB->buildItem(room);
+            }
         }
+        double doorChance = Game::instance()->randomDouble();
+        std::shared_ptr<core::dungeon::RoomEdge> door;
+
+        if(doorChance > 0.2 and doorChance < 0.5) {
+            door = std::make_shared<core::dungeon::common::OpenDoorway>();
+        }
+        else if(doorChance > 0.5 and doorChance < 0.8) {
+            door = std::make_shared<core::dungeon::common::LockedDoor>();
+        }
+        else if(doorChance < 0.2) {
+            door = std::make_shared<core::dungeon::common::BlockedDoorway>();
+        }
+        else {
+            door = std::make_shared<core::dungeon::common::OneWayDoor>(false, false);
+        }
+        room->setEdge(core::dungeon::Room::Direction::East, door);
+
+        // Last room in the level has a boss creature and the exit.
+        if(roomNum == max) {
+            _DB->buildExit(room, core::dungeon::Room::Direction::East);
+            _DB->buildCreature(room, true);
+
+        }
+        roomNum ++;
     }
 }
 
@@ -204,7 +223,7 @@ double Game::randomDouble() {
     return _realDistribution(_randomGenerator);
 }
 
-std::shared_ptr<core::dungeon::DungeonLevelBuilder> Game::getDungeon() {
+core::dungeon::DungeonLevelBuilder* Game::getBuilder() {
     return _DB;
 }
 

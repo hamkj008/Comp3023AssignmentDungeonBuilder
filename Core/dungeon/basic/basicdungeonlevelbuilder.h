@@ -10,7 +10,6 @@ namespace core::dungeon::basic {
 class BasicDungeonLevelBuilder : public DungeonLevelBuilder
 {
 public:
-
     BasicDungeonLevelBuilder();
 
     virtual void buildDungeonLevel(std::string name, int width, int height) override;
@@ -23,7 +22,6 @@ public:
 
 
 private:
-
     std::vector<std::shared_ptr<core::items::Item>> _basicItemList;
     std::vector<std::shared_ptr<core::creatures::AbstractCreature>> _basicCreatureList;
 

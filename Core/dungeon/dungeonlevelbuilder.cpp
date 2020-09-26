@@ -1,13 +1,21 @@
 #include "dungeonlevelbuilder.h"
-
+#include <iostream>
 
 namespace core::dungeon {
 
 DungeonLevelBuilder::DungeonLevelBuilder()
 
 {
-
+    std::cout << "DungeonLevelBuilder created" << std::endl;
 }
+DungeonLevelBuilder::~DungeonLevelBuilder()
+
+{
+    std::cout << "DungeonLevelBuilder deleted" << std::endl;
+    delete _dungeonLevel;
+}
+
+
 void DungeonLevelBuilder::buildDungeonLevel(std::string name, int width, int height) {
 
 }
@@ -36,7 +44,7 @@ void DungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
 void DungeonLevelBuilder::buildCreature(std::shared_ptr<Room> &room, bool isBoss) {
 
 }
-std::shared_ptr<DungeonLevel> DungeonLevelBuilder::getDungeonLevel() {
+DungeonLevel* DungeonLevelBuilder::getDungeonLevel() {
     return _dungeonLevel;
 }
 

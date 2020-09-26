@@ -14,8 +14,6 @@ RoomEdge::~RoomEdge() {
 }
 
 
-
-
 void RoomEdge::setDirection(Room::Direction direction) {
     _direction = direction;
 }

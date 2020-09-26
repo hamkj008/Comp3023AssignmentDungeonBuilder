@@ -8,6 +8,11 @@
 #include "Core/items/weapon.h"
 #include "Core/items/consumable.h"
 #include "Core/game.h"
+#include "Core/dungeon/doorway.h"
+#include "Core/dungeon/common/onewaydoor.h"
+#include "Core/dungeon/common/opendoorway.h"
+#include "Core/dungeon/magical/magicwall.h"
+
 
 
 namespace core::dungeon::magical {
@@ -50,15 +55,14 @@ void MagicalDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, 
         height = 4;
     }
 
-    _dungeonLevel = std::make_shared<MagicalDungeonLevel>(name, width, height);
+    _dungeonLevel = new MagicalDungeonLevel(name, width, height);
 
    std::cout << "number of rooms " << _dungeonLevel->numberOfRooms() << std::endl;
 
-   int i{0};
-   while(i < _dungeonLevel->numberOfRooms()) {
+   int i{1};
+   while(i <= _dungeonLevel->numberOfRooms()) {
        std::shared_ptr<Room> room = buildRoom(i);
        _dungeonLevel->addRoom(room);
-       std::cout << "after room" << std::endl;
        std::cout << room->id() << std::endl;
        i++;
    }
@@ -83,11 +87,13 @@ void MagicalDungeonLevelBuilder::buildDoorway(std::shared_ptr<Room> &origin,
 }
 
 void MagicalDungeonLevelBuilder::buildEntrance(std::shared_ptr<Room> &room, Room::Direction direction) {
-
+    std::shared_ptr<RoomEdge> entrance = std::make_shared<core::dungeon::common::OneWayDoor>(true, false);
+    room->setEdge(direction, entrance);
 }
 
 void MagicalDungeonLevelBuilder::buildExit(std::shared_ptr<Room> &room, Room::Direction direction) {
-
+    std::shared_ptr<RoomEdge> exit = std::make_shared<core::dungeon::common::OneWayDoor>(false, true);
+    room->setEdge(direction, exit);
 }
 
 void MagicalDungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
@@ -95,7 +101,6 @@ void MagicalDungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
     int max = 5;
     int min = 0;
     int randomItemNum = randomDouble * ((max + 1) - min) + min;
-    std::cout << "range 0 - 5 " << randomItemNum << std::endl;
 
     std::shared_ptr<core::items::Item> newItem = _magicItemList[randomItemNum]->clone();
 
@@ -107,7 +112,6 @@ void MagicalDungeonLevelBuilder::buildCreature(std::shared_ptr<Room> &room, bool
     int max = 2;
     int min = 0;
     int randomCreatureNum = randomDouble * ((max + 1) - min) + min;
-    std::cout << "range 0 - 2 " << randomCreatureNum << std::endl;
 
     std::shared_ptr<core::creatures::AbstractCreature> newCreature = _magicCreatureList[randomCreatureNum]->clone();
     newCreature->setBoss(isBoss);

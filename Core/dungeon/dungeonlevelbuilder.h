@@ -13,7 +13,7 @@ class DungeonLevelBuilder
 {
 public:
     DungeonLevelBuilder();
-
+    virtual ~DungeonLevelBuilder();
 
     enum class MoveConstraints : unsigned
     {
@@ -24,25 +24,21 @@ public:
         DestinationLocked = 8
     };
 
-
-    // this method must use bare pointer
     virtual void buildDungeonLevel(std::string name, int width, int height);
 
-    // Room type chosen randomly
     virtual std::shared_ptr<Room> buildRoom(int id);
 
     virtual void buildDoorway(std::shared_ptr<Room> &origin, std::shared_ptr<Room> &destination, Room::Direction direction, MoveConstraints constraints);
-
     virtual void buildEntrance(std::shared_ptr<Room> &room, Room::Direction direction);
     virtual void buildExit(std::shared_ptr<Room> &room, Room::Direction direction);
 
-
     virtual void buildItem(std::shared_ptr<Room> &room);
     virtual void buildCreature(std::shared_ptr<Room> &room, bool isBoss);
-    virtual std::shared_ptr<DungeonLevel> getDungeonLevel();
+
+    virtual DungeonLevel* getDungeonLevel();
 
 protected:
-    std::shared_ptr<DungeonLevel> _dungeonLevel;
+    DungeonLevel *_dungeonLevel;
 
 };
 

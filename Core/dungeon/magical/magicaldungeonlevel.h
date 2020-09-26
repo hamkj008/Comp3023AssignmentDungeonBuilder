@@ -12,16 +12,13 @@ namespace core::dungeon::magical {
 class MagicalDungeonLevel : public DungeonLevel
 {
 public:
-    MagicalDungeonLevel(std::string name, int width, int height);
+    MagicalDungeonLevel(std::string &name, int &width, int &height);
 
 
     virtual std::string description() const override;
 
 
 private:
-    std::string _name;
-    int _width;
-    int _height;
     std::string _type;
 
 };

@@ -37,10 +37,11 @@ public:
     virtual std::shared_ptr<core::creatures::AbstractCreature> creature();
     virtual void setCreature(std::shared_ptr<core::creatures::AbstractCreature> &newCreature);
 
-    virtual void setEdge(Direction direction, std::shared_ptr<RoomEdge> &roomEdge);
+    virtual void setEdge(Direction direction, std::shared_ptr<RoomEdge> roomEdge);
     virtual std::shared_ptr<RoomEdge> getEdge(Room::Direction direction);
 
     std::ostream& operator <<(std::ostream &display);
+
 
 protected:
     std::shared_ptr<RoomEdge> _northEdge;

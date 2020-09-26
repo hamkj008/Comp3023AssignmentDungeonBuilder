@@ -1,9 +1,6 @@
 #include <iostream>
-#include <memory>
-#include <array>
-
 #include "Core/menuinterface.h"
-#include "Core/dungeon/common/onewaydoor.h"
+
 
 int main()
 {

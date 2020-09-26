@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-
+#include "Core/dungeon/roomedge.h"
 
 namespace core::dungeon {
 
@@ -47,35 +47,59 @@ std::string DungeonLevel::name() {
 }
 
 
-std::vector<std::string> DungeonLevel::display() {
-    std::stringstream ss{};
-    std::array<std::string, 5> roomDisplay{};
 
-    int dungeonHeight{};
+std::vector<std::string> DungeonLevel::display() {
+    std::stringstream stringstream{};
+    std::array<std::string, 5> roomDisplay{};
+    // vstream is a container that stores the vertical connections between each height level in the dungeon.
+    std::stringstream vstream{};
+
+    int dungeonHeight{1};
     int start{};
     int end = _width;
 
     if(_dungeonDisplay.size() == 0) {
-        while(dungeonHeight < _height) {
+        while(dungeonHeight <= _height) {
             // Holds the number of lines in the room.
             for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
                 // appends each line in the row together depending on the width
                 for(int j = start; j < end; ++j) {
                     roomDisplay = _roomList[j]->display();
-                    ss << roomDisplay[i];
-                    if(i == 2) {
-                        ss << "--";
+                    stringstream << roomDisplay[i];
+
+                    if(_roomList[j]->id() < end) {
+                        if(i == 2) {
+                            if(_roomList[j]->getEdge(Room::Direction::East)->isPassage() == true){
+                                stringstream << "--";
+                            }
+                            else {
+                                stringstream << "  ";
+                            }
+                        }
+                        else {
+                            stringstream << "  ";
+                        }
                     }
-                    else {
-                        ss << "  ";
+                    if(i == 4){
+                        if(_roomList[j]->getEdge(Room::Direction::South)->isPassage() == true){
+                            vstream << "     |     ";
+                        }
+                        else {
+                            vstream << "           ";
+                        }
+                        if(_roomList[j]->id() < end) {
+                            vstream << "  ";
+                         }
                     }
                 }
-                _dungeonDisplay.push_back(ss.str());
-                ss.str("");
+                _dungeonDisplay.push_back(stringstream.str());
+                stringstream.str("");
             }
-            ss << "+    |    +";
-            _dungeonDisplay.push_back(ss.str());
-            ss.str("");
+            if(dungeonHeight < _height){
+                _dungeonDisplay.push_back(vstream.str());
+                vstream.str("");
+            }
+            stringstream.str("");
             start += _width;
             end += _width;
             dungeonHeight ++;
@@ -84,9 +108,9 @@ std::vector<std::string> DungeonLevel::display() {
     return _dungeonDisplay;
 }
 
-std::ostream& DungeonLevel::operator <<(std::ostream &display) {
-    return display << description();
+//std::ostream& DungeonLevel::operator <<(std::ostream &display) {
+//    return display << description();
 
-}
+//}
 
 }

@@ -4,7 +4,7 @@
 namespace core::dungeon::magical {
 
 
-MagicalDungeonLevel::MagicalDungeonLevel(std::string name, int width, int height)
+MagicalDungeonLevel::MagicalDungeonLevel(std::string &name, int &width, int &height)
     : DungeonLevel(name, width, height),
       _type{"Magic Cave"}
 {
@@ -13,9 +13,9 @@ MagicalDungeonLevel::MagicalDungeonLevel(std::string name, int width, int height
 
 std::string MagicalDungeonLevel::description() const {
     std::stringstream ss;
-    ss << _name <<
-          "Size: " << _width << " x " << _height <<
-          "Type: " << _type;
+    ss << "\n" << _name <<
+    "\nSize: " << _width << " x " << _height <<
+    "\nType: " << _type << std::endl;
 
     std::string description{ss.str()};
 

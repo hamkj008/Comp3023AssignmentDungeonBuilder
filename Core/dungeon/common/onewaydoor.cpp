@@ -7,9 +7,9 @@ namespace core::dungeon::common {
 OneWayDoor::OneWayDoor(bool entrance, bool exit)
     : _description{"One-Way Door"},
       _character{},
+      _passage{false},
       _entrance{entrance},
-      _exit{exit},
-      _passage{}
+      _exit{exit}
 {
 
 }
@@ -42,19 +42,37 @@ char OneWayDoor::displayCharacter() {
     return _character;
 }
 
+void OneWayDoor::setPassage(bool passage) {
+    if(_entrance == true or _exit == true) {
+        _passage = false;
+    }
+    else {
+        _passage = passage;
+    }
+}
+
 bool OneWayDoor::isPassage() const {
     return _passage;
 
 }
-bool OneWayDoor::isEntrance() {
+bool OneWayDoor::isEntrance() const {
     return _entrance;
 }
 
-bool OneWayDoor::isExit() {
+bool OneWayDoor::isExit() const {
     return _exit;
 }
 
 std::ostream& OneWayDoor::operator <<(std::ostream &display) {
-    return display << "a " << description() << " from another chamber";
+    if(_entrance == true) {
+        return display << "the entrance to the dungeon level.";
+    }
+    else if(_exit == true) {
+        return display << "the exit from the dungeon level.";
+    }
+    else {
+        return display << "a " << description() << " from another chamber";
+    }
 }
+
 }

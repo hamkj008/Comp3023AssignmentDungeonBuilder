@@ -21,6 +21,7 @@ char RockWall::displayCharacter() {
         return '|';
     }
 }
+
 bool RockWall::isPassage() const {
     return false;
 }

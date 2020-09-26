@@ -15,7 +15,6 @@ public:
 
     virtual std::string description() const override;
     virtual char displayCharacter() override;
-
     virtual bool isPassage() const override;
 
     std::ostream& operator <<(std::ostream &display) override;

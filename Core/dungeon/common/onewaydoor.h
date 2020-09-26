@@ -15,17 +15,19 @@ public:
     virtual char displayCharacter() override;
     virtual bool isPassage() const override;
 
-    bool isEntrance() override;
-    bool isExit() override;
+    virtual bool isEntrance() const override;
+    virtual bool isExit() const override;
+
+    virtual void setPassage(bool passage) override;
 
     std::ostream& operator <<(std::ostream &display) override;
 
 private:
     std::string _description;
     char _character;
+    bool _passage;
     bool _entrance;
     bool _exit;
-    bool _passage;
 };
 }
 #endif // ONEWAYDOOR_H

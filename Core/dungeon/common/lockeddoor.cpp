@@ -7,7 +7,7 @@ namespace core::dungeon::common {
 LockedDoor::LockedDoor()
     : _description{"Locked Door"},
       _character{'@'},
-      _passage{true}
+      _passage{false}
 {
 
 }
@@ -20,17 +20,14 @@ char LockedDoor::displayCharacter() {
     return _character;
 }
 
+void LockedDoor::setPassage(bool passage) {
+    _passage = passage;
+}
+
 bool LockedDoor::isPassage() const {
     return _passage;
-
-}
-bool LockedDoor::isEntrance() {
-    return false;
 }
 
-bool LockedDoor::isExit() {
-    return false;
-}
 
 std::ostream& LockedDoor::operator <<(std::ostream &display) {
     return display << "a " << description() << " to another chamber";

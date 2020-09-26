@@ -5,7 +5,7 @@ namespace core::dungeon::basic {
 
 
 BasicDungeonLevel::BasicDungeonLevel(std::string &name, int &width, int &height)
-    : DungeonLevel(name,width, height),
+    : DungeonLevel(name, width, height),
       _type{"Dark Cave (Basic Dungeon)"}
 {
 

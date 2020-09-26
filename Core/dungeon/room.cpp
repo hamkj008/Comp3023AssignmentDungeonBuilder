@@ -109,7 +109,7 @@ void Room::setCreature(std::shared_ptr<core::creatures::AbstractCreature> &newCr
     _creature = newCreature;
 }
 
-void Room::setEdge(Room::Direction direction, std::shared_ptr<RoomEdge> &roomEdge) {
+void Room::setEdge(Room::Direction direction, std::shared_ptr<RoomEdge> roomEdge) {
 
     if(direction == Room::Direction::North) {
         _northEdge = roomEdge;

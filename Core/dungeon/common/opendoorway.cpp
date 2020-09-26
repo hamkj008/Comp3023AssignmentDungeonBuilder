@@ -7,7 +7,7 @@ namespace core::dungeon::common {
 OpenDoorway::OpenDoorway()
     : _description{"Open Doorway"},
       _character{},
-      _passage{}
+      _passage{false}
 {
 
 }
@@ -32,16 +32,12 @@ char OpenDoorway::displayCharacter() {
     return _character;
 }
 
+void OpenDoorway::setPassage(bool passage) {
+    _passage = passage;
+}
+
 bool OpenDoorway::isPassage() const {
     return _passage;
-
-}
-bool OpenDoorway::isEntrance() {
-    return false;
-}
-
-bool OpenDoorway::isExit() {
-    return false;
 }
 
 std::ostream& OpenDoorway::operator <<(std::ostream &display) {

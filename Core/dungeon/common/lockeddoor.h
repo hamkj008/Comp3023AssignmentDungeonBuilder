@@ -16,8 +16,7 @@ public:
     virtual char displayCharacter() override;
     virtual bool isPassage() const override;
 
-    bool isEntrance() override;
-    bool isExit() override;
+    virtual void setPassage(bool passage) override;
 
     std::ostream& operator <<(std::ostream &display) override;
 
