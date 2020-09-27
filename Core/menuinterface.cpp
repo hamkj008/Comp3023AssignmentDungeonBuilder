@@ -98,22 +98,23 @@ void MenuInterface::mainMenu(){
     } while(conditions == false);
 }
 
-/**
- * @brief MenuInterface::randomDungeonMenu
- * randomDungeonMenu displays the choices available to create a customised and randomly generated dungeon level.
- *
- */
 void MenuInterface::randomDungeonMenu(){
-    std::stringstream stringstream{};
-
     std::string levelName{};
     int width{};
     int height{};
 
-    *_display << "\nWhat would you like to call the level? \n";
-    *_input >> levelName;
+    bool nameCheck{};
+    do {
+        nameCheck = true;
+        *_display << "\nWhat would you like to call the level? \n";
+        *_input >> levelName;
+        if(levelName.length() == 0) {
+            *_display << "\nYou have not entered a proper name. Level name can not be blank. Please enter a name.";
+            nameCheck = false;
+        }
+    }while(nameCheck == false);
 
-    bool rowCheck;
+    bool rowCheck{};
     do {
         rowCheck = true;
         std::string rowSelect{};
@@ -121,18 +122,18 @@ void MenuInterface::randomDungeonMenu(){
         *_display << "\nHow many rows in *" << levelName << "*? \n";
         *_input >> rowSelect;
 
-        stringstream << rowSelect;
+        std::stringstream stringstream{rowSelect};
         stringstream >> width;
-        stringstream.clear();
+        stringstream.str("");
 
         if(width < 1 or width >  4) {
             *_display << "\nYou have not entered a number in the valid range. Please choose between 1 - 4";
             rowCheck = false;
-            stringstream.clear();
+            stringstream.str("");
         }
     } while(rowCheck == false);
 
-    bool colCheck;
+    bool colCheck{};
     do {
         colCheck = true;
         std::string colSelect{};
@@ -140,18 +141,18 @@ void MenuInterface::randomDungeonMenu(){
         *_display << "\nHow many columns in *" << levelName << "*? \n";
         *_input >> colSelect;
 
-        stringstream << colSelect;
+        std::stringstream stringstream{colSelect};
         stringstream >> height;
-        stringstream.clear();
+        stringstream.str("");
 
         if(height < 1 or height > 4) {
             *_display << "\nYou have not entered a number in the valid range. Please choose between 1 - 4";
             colCheck = false;
-            stringstream.clear();
+            stringstream.str("");
         }
     } while(colCheck == false);
 
-    bool typeCheck;
+    bool typeCheck{};
     do {
         typeCheck = true;
         char type{};
@@ -181,12 +182,6 @@ void MenuInterface::randomDungeonMenu(){
     dungeonViewMenu();
 }
 
-
-/**
- * @brief MenuInterface::dungeonViewMenu
- * The dungeonViewMenu lets the user view the created dungeon level, as well as choose
- * any room in the level that the user wants to be described.
- */
 void MenuInterface::dungeonViewMenu(){
     bool conditions = true;
     char selection{};
@@ -223,8 +218,11 @@ void MenuInterface::dungeonViewMenu(){
         }
     }while(conditions == false);
 }
+
 void MenuInterface::dungeonExploreMenu(){
+    // User input check gate.
     bool conditions = true;
+    // The users selection
     char selection{};
     do {
         *_display << "\nWhat would you like to do?\n"
@@ -237,8 +235,8 @@ void MenuInterface::dungeonExploreMenu(){
         case('d'): {
             conditions = true;
             int roomNum{};
-
-            bool roomCheck;
+            // User input correct range check
+            bool roomCheck{};
             do {
                 roomCheck = true;
                 std::string roomSelect{};

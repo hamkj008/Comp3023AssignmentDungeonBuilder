@@ -6,7 +6,10 @@
 
 namespace core::creatures {
 
-
+/**
+ * @brief The AbstractCreature class
+ * The abstract prototype class used for creating concrete creatures.
+ */
 class AbstractCreature
 {
 public:

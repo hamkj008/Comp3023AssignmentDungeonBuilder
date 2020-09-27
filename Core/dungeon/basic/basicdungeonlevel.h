@@ -6,14 +6,21 @@
 
 namespace core::dungeon::basic {
 
-
+/**
+ * @brief The BasicDungeonLevel class
+ * The concrete Dungeon Level product, produced by the Builder, for basic dungeons.
+ */
 class BasicDungeonLevel : public DungeonLevel
 {
 public:
 
     BasicDungeonLevel(std::string &name, int &width, int &height);
 
-
+    /**
+     * @brief description
+     * @return the string description.
+     * A brief desciption of the level, including name, size and type.
+     */
     virtual std::string description() const override;
 
 

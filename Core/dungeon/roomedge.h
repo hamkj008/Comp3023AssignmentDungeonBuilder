@@ -22,7 +22,7 @@ public:
     virtual void setDirection(Room::Direction direction);
     virtual Room::Direction getDirection() const;
 
-    virtual std::ostream& operator <<(std::ostream &display);
+    virtual std::ostream& operator <<(std::ostream &display) = 0;
 
 private:
     Room::Direction _direction;

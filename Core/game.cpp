@@ -155,62 +155,116 @@ void Game::createExampleLevel(){
 }
 
 void Game::createRandomLevel(std::string &name, int &width, int &height) {
+    core::dungeon::Room::Direction direction{};
     _DB->buildDungeonLevel(name, width, height);
 
     int max = _DB->getDungeonLevel()->numberOfRooms();
     int roomNum = 1;
 
-    std::shared_ptr<core::dungeon::Room> room = _DB->getDungeonLevel()->retrieveRoom(roomNum);
-    _DB->buildEntrance(room, core::dungeon::Room::Direction::North);
-
     while(roomNum <= max) {
-        // Build boss room
-        room = _DB->getDungeonLevel()->retrieveRoom(roomNum);
+        std::shared_ptr<core::dungeon::Room> room = _DB->getDungeonLevel()->retrieveRoom(roomNum);
 
-        double creatureChance = Game::instance()->randomDouble();
-        if(creatureChance < 0.4) {
-            if(room->creature() == nullptr) {
-                _DB->buildCreature(room, false);
+        std::shared_ptr<core::dungeon::Room> room2;
+
+        std::shared_ptr<core::dungeon::Doorway> door1;
+        std::shared_ptr<core::dungeon::Doorway> door2;
+
+        // Build the entrance
+        if(roomNum == 1) {
+            double directionChance = Game::instance()->randomDouble();
+            if(directionChance < 0.5) {
+                direction = core::dungeon::Room::Direction::North;
             }
-        }
-
-        double itemChance = Game::instance()->randomDouble();
-        if(itemChance < 0.4) {
-            if(room->item() == nullptr) {
-                _DB->buildItem(room);
+            else {
+                direction = core::dungeon::Room::Direction::West;
             }
+            _DB->buildEntrance(room, direction);
         }
-        double doorChance = Game::instance()->randomDouble();
-        std::shared_ptr<core::dungeon::RoomEdge> door;
-
-        if(doorChance > 0.2 and doorChance < 0.5) {
-            door = std::make_shared<core::dungeon::common::OpenDoorway>();
-        }
-        else if(doorChance > 0.5 and doorChance < 0.8) {
-            door = std::make_shared<core::dungeon::common::LockedDoor>();
-        }
-        else if(doorChance < 0.2) {
-            door = std::make_shared<core::dungeon::common::BlockedDoorway>();
-        }
-        else {
-            door = std::make_shared<core::dungeon::common::OneWayDoor>(false, false);
-        }
-        room->setEdge(core::dungeon::Room::Direction::East, door);
 
         // Last room in the level has a boss creature and the exit.
-        if(roomNum == max) {
-            _DB->buildExit(room, core::dungeon::Room::Direction::East);
+        else if(roomNum == max) {
+            double directionChance = Game::instance()->randomDouble();
+            if(directionChance < 0.5) {
+                direction = core::dungeon::Room::Direction::East;
+            }
+            else {
+                direction = core::dungeon::Room::Direction::South;
+            }
+            _DB->buildExit(room, direction);
             _DB->buildCreature(room, true);
+        }
+        else {
+            // Chance for creature to be placed in room
+            double creatureChance = Game::instance()->randomDouble();
+            if(creatureChance < 0.4) {
+                if(room->creature() == nullptr) {
+                    _DB->buildCreature(room, false);
+                }
+            }
+            // Chance for item to be placed in room
+            double itemChance = Game::instance()->randomDouble();
+            if(itemChance < 0.4) {
+                if(room->item() == nullptr) {
+                    _DB->buildItem(room);
+                }
+            }
 
+            createDoor(door1);
+            createDoor(door2);
+
+            double doorPlacementChance = Game::instance()->randomDouble();
+
+            if(doorPlacementChance < 0.5) {
+                direction = core::dungeon::Room::Direction::East;
+                if((roomNum % width) == 0) {
+
+                }
+                else {
+                    room->setEdge(direction, door1);
+                    door1->connect(door2);
+
+                    room2 = _DB->getDungeonLevel()->retrieveRoom(roomNum + 1);
+                    room2->setEdge(door2->getDirection(), door2);
+                }
+            }
+            else {
+                direction = core::dungeon::Room::Direction::South;
+                if((roomNum + width) <= max) {
+                    room->setEdge(direction, door1);
+                    door1->connect(door2);
+
+                    room2 = _DB->getDungeonLevel()->retrieveRoom(roomNum + width);
+                    room2->setEdge(door2->getDirection(), door2);
+                }
+            }
         }
         roomNum ++;
     }
+
 }
+
+void Game::createDoor(std::shared_ptr<core::dungeon::Doorway> &door) {
+
+    double doorTypeChance = Game::instance()->randomDouble();
+
+    if(doorTypeChance > 0.0 and doorTypeChance < 0.4) {
+        door = std::make_shared<core::dungeon::common::OpenDoorway>();
+    }
+    else if(doorTypeChance > 0.4 and doorTypeChance < 0.6) {
+        door = std::make_shared<core::dungeon::common::LockedDoor>();
+    }
+    else if(doorTypeChance > 0.6 and doorTypeChance < 0.8) {
+        door = std::make_shared<core::dungeon::common::BlockedDoorway>();
+    }
+    else if(doorTypeChance > 0.8 and doorTypeChance < 1.0) {
+        door = std::make_shared<core::dungeon::common::OneWayDoor>(false, false);
+    }
+}
+
 
 void Game::displayLevel(std::ostream &display) {
 
     std::vector<std::string> dungeonStrings = _DB->getDungeonLevel()->display();
-
 
     std::cout << "before dungeonDisplay" << std::endl;
     for(std::string s : dungeonStrings) {

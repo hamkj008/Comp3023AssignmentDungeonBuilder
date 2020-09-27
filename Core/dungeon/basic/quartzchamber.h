@@ -7,7 +7,10 @@
 
 namespace core::dungeon::basic {
 
-
+/**
+ * @brief The QuartzChamber class
+ * A type of room for basic dungeons.
+ */
 class QuartzChamber final : public Room
 {
 public:

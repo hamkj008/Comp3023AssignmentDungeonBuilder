@@ -1,7 +1,10 @@
 #include <iostream>
 #include "Core/menuinterface.h"
 
-
+/**
+ * @brief main
+ * @return
+ */
 int main()
 {
     core::MenuInterface menu{std::cout, std::cin};

@@ -12,12 +12,12 @@ BasicDungeonLevel::BasicDungeonLevel(std::string &name, int &width, int &height)
 }
 
 std::string BasicDungeonLevel::description() const {
-    std::stringstream ss;
-    ss << "\n" << _name <<
+    std::stringstream stringstream;
+    stringstream << "\n" << _name <<
     "\nSize: " << _width << " x " << _height <<
     "\nType: " << _type << std::endl;
 
-    std::string description{ss.str()};
+    std::string description{stringstream.str()};
 
     return description;
 }

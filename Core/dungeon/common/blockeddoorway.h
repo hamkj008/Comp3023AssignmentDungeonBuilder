@@ -19,7 +19,7 @@ public:
 
     virtual void setPassage(bool passage) override;
 
-    std::ostream& operator <<(std::ostream &display) override;
+    virtual std::ostream& operator <<(std::ostream &display) override;
 
 private:
     std::string _description;

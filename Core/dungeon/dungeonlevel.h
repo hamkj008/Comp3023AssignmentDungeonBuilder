@@ -8,7 +8,12 @@
 
 namespace core::dungeon {
 
-
+/**
+ * @brief The DungeonLevel class
+ * The Dungeon Level class is the base class for all dungeon levels.
+ * It holds the series of rooms and connections bewteen them, as well as the total output,
+ * ready to be displayed.
+ */
 class DungeonLevel
 {
 public:
@@ -23,6 +28,11 @@ public:
     virtual int numberOfRooms();
     virtual std::string name();
     virtual std::string description() const = 0;
+
+    /**
+     * @brief display
+     * @return a vector of strings for each linne of the dungeon display
+     */
     virtual std::vector<std::string> display();
 
     std::ostream& operator <<(std::ostream &display);

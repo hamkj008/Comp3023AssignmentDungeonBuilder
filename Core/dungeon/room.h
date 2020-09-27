@@ -40,6 +40,12 @@ public:
     virtual void setEdge(Direction direction, std::shared_ptr<RoomEdge> roomEdge);
     virtual std::shared_ptr<RoomEdge> getEdge(Room::Direction direction);
 
+    /**
+     * @brief operator <<
+     * @param display
+     * @return std::ostream&
+     * Formats the contents of the room ready to be described.
+     */
     std::ostream& operator <<(std::ostream &display);
 
 

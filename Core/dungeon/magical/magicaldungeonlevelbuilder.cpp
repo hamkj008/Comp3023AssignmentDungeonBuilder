@@ -20,6 +20,7 @@ namespace core::dungeon::magical {
 MagicalDungeonLevelBuilder::MagicalDungeonLevelBuilder()
     : _magicItemList{}, _magicCreatureList{}
 {
+    // The list of items available for magic dungeons.
     std::shared_ptr<core::items::Item> healthPotion = std::make_shared<core::items::Consumable>("Health Potion");
     _magicItemList.push_back(healthPotion);
     std::shared_ptr<core::items::Item> molotovCocktail = std::make_shared<core::items::Consumable>("Molotov Cocktail");
@@ -33,6 +34,7 @@ MagicalDungeonLevelBuilder::MagicalDungeonLevelBuilder()
     std::shared_ptr<core::items::Item> magicWand = std::make_shared<core::items::Weapon>("Magic Wand");
     _magicItemList.push_back(magicWand);
 
+    // The list of creatures available for magic dungeons.
     std::shared_ptr<core::creatures::AbstractCreature> goblin = std::make_shared<core::creatures::Monster>("Goblin");
     _magicCreatureList.push_back(goblin);
     std::shared_ptr<core::creatures::AbstractCreature> evilWizard = std::make_shared<core::creatures::Monster>("Evil Wizard");
@@ -60,6 +62,7 @@ void MagicalDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, 
    std::cout << "number of rooms " << _dungeonLevel->numberOfRooms() << std::endl;
 
    int i{1};
+   // Adds rooms to the roomlist untill the maximum number of rooms is reached.
    while(i <= _dungeonLevel->numberOfRooms()) {
        std::shared_ptr<Room> room = buildRoom(i);
        _dungeonLevel->addRoom(room);
@@ -72,7 +75,8 @@ std::shared_ptr<Room> MagicalDungeonLevelBuilder::buildRoom(int id) {
     double randomDouble = Game::instance()->randomDouble();
     std::shared_ptr<Room> room;
 
-    if(randomDouble > 0.2) {
+    // Chooses the type of room to be built
+    if(randomDouble > 0.3) {
         room = std::make_shared<EnchantedLibrary>(id);
     }
     else {

@@ -13,8 +13,6 @@ public:
     Wall();
     virtual ~Wall();
 
-
-    virtual bool isPassage() const override;
 };
 }
 #endif // WALL_H

@@ -17,6 +17,7 @@ namespace core::dungeon::basic {
 BasicDungeonLevelBuilder::BasicDungeonLevelBuilder()
     : _basicItemList{}, _basicCreatureList{}
 {
+    // The list of items available for basic dungeons.
     std::shared_ptr<core::items::Item> healthPotion = std::make_shared<core::items::Consumable>("Health Potion");
     _basicItemList.push_back(healthPotion);
     std::shared_ptr<core::items::Item> molotovCocktail = std::make_shared<core::items::Consumable>("Molotov Cocktail");
@@ -30,6 +31,7 @@ BasicDungeonLevelBuilder::BasicDungeonLevelBuilder()
     std::shared_ptr<core::items::Item> battleAxe = std::make_shared<core::items::Weapon>("BattleAxe");
     _basicItemList.push_back(battleAxe);
 
+    // The list of creatures available for basic dungeons.
     std::shared_ptr<core::creatures::AbstractCreature> goblin = std::make_shared<core::creatures::Monster>("Goblin");
     _basicCreatureList.push_back(goblin);
     std::shared_ptr<core::creatures::AbstractCreature> werewolf = std::make_shared<core::creatures::Monster>("Werewolf");
@@ -58,6 +60,7 @@ void BasicDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, in
    std::cout << "number of rooms " << _dungeonLevel->numberOfRooms() << std::endl;
 
    int i{1};
+   // Adds rooms to the roomlist untill the maximum number of rooms is reached.
    while(i <= _dungeonLevel->numberOfRooms()) {
        std::shared_ptr<Room> room = buildRoom(i);
        _dungeonLevel->addRoom(room);
@@ -70,7 +73,7 @@ std::shared_ptr<Room> BasicDungeonLevelBuilder::buildRoom(int id) {
     double randomDouble = Game::instance()->randomDouble();
     std::shared_ptr<Room> room;
 
-    if(randomDouble > 0.2) {
+    if(randomDouble > 0.3) {
         room = std::make_shared<RockChamber>(id);
     }
     else {
@@ -79,9 +82,8 @@ std::shared_ptr<Room> BasicDungeonLevelBuilder::buildRoom(int id) {
     return room;
 }
 
+
 void BasicDungeonLevelBuilder::buildDoorway(std::shared_ptr<Room> &origin, std::shared_ptr<Room> &destination, Room::Direction direction, MoveConstraints constraints) {
-
-
 
 }
 
@@ -95,13 +97,14 @@ void BasicDungeonLevelBuilder::buildExit(std::shared_ptr<Room> &room, Room::Dire
     room->setEdge(direction, exit);
 }
 
-// Select a random item from the list
 void BasicDungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
     double randomDouble = Game::instance()->randomDouble();
     int max = 5;
     int min = 0;
+    // Convert double into integer with specific range
     int randomItemNum = randomDouble * ((max + 1) - min) + min;
 
+    // Clone the random item from the list according to the random number.
     std::shared_ptr<core::items::Item> newItem = _basicItemList[randomItemNum]->clone();
 
     room->setItem(newItem);
@@ -111,8 +114,10 @@ void BasicDungeonLevelBuilder::buildCreature(std::shared_ptr<Room> &room, bool i
     double randomDouble = Game::instance()->randomDouble();
     int max = 2;
     int min = 0;
+    // Convert double into integer with specific range
     int randomCreatureNum = randomDouble * ((max + 1) - min) + min;
 
+    // Clone the random creature from the list according to the random number.
     std::shared_ptr<core::creatures::AbstractCreature> newCreature = _basicCreatureList[randomCreatureNum]->clone();
     newCreature->setBoss(isBoss);
     room->setCreature(newCreature);

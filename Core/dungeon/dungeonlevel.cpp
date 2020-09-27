@@ -49,24 +49,31 @@ std::string DungeonLevel::name() {
 
 
 std::vector<std::string> DungeonLevel::display() {
+    // Concatenates each line of the row of the dungeon level
     std::stringstream stringstream{};
+    // Holds the number of lines in the room.
     std::array<std::string, 5> roomDisplay{};
-    // vstream is a container that stores the vertical connections between each height level in the dungeon.
-    std::stringstream vstream{};
+    // hstream is a container for displaying the connections between each height/row level in the dungeon.
+    std::stringstream hstream{};
 
     int dungeonHeight{1};
     int start{};
     int end = _width;
 
+    // Guard to stop the display from mulitplying if called again.
     if(_dungeonDisplay.size() == 0) {
+
+        // dungeonHeight increments after each row has been completed.
         while(dungeonHeight <= _height) {
-            // Holds the number of lines in the room.
+            // For each line of the room display
             for(std::size_t i{0}; i < roomDisplay.size(); ++i) {
-                // appends each line in the row together depending on the width
+                // appends the line of each room in the row together depending on the width
                 for(int j = start; j < end; ++j) {
                     roomDisplay = _roomList[j]->display();
                     stringstream << roomDisplay[i];
 
+                    // Appends the bridge connections between doors if there is a passage
+                    // or puts a gap in between the rooms for each column.
                     if(_roomList[j]->id() < end) {
                         if(i == 2) {
                             if(_roomList[j]->getEdge(Room::Direction::East)->isPassage() == true){
@@ -80,25 +87,30 @@ std::vector<std::string> DungeonLevel::display() {
                             stringstream << "  ";
                         }
                     }
+                    // Appends the bridge connections between doors if there is a passage
+                    // or puts a gap in between the rooms for each row.
                     if(i == 4){
                         if(_roomList[j]->getEdge(Room::Direction::South)->isPassage() == true){
-                            vstream << "     |     ";
+                            hstream << "     |     ";
                         }
                         else {
-                            vstream << "           ";
+                            hstream << "           ";
                         }
                         if(_roomList[j]->id() < end) {
-                            vstream << "  ";
+                            hstream << "  ";
                          }
                     }
                 }
+                // Adds each line to the total display
                 _dungeonDisplay.push_back(stringstream.str());
                 stringstream.str("");
             }
+            // Once the lines of the room are done, adds an extra line for the row connections.
             if(dungeonHeight < _height){
-                _dungeonDisplay.push_back(vstream.str());
-                vstream.str("");
+                _dungeonDisplay.push_back(hstream.str());
+                hstream.str("");
             }
+            // Moves on to the next row by incrementing the next set of rooms.
             stringstream.str("");
             start += _width;
             end += _width;
@@ -108,9 +120,5 @@ std::vector<std::string> DungeonLevel::display() {
     return _dungeonDisplay;
 }
 
-//std::ostream& DungeonLevel::operator <<(std::ostream &display) {
-//    return display << description();
-
-//}
 
 }

@@ -6,7 +6,10 @@
 
 namespace core::dungeon::basic {
 
-
+/**
+ * @brief The RockChamber class
+ * A type of room for basic dungeons.
+ */
 class RockChamber final : public Room {
 
 public:

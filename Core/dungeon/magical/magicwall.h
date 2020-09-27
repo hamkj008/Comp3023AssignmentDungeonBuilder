@@ -17,7 +17,7 @@ public:
     virtual char displayCharacter() override;
     virtual bool isPassage() const override;
 
-    std::ostream& operator <<(std::ostream &display) override;
+    virtual std::ostream& operator <<(std::ostream &display) override;
 };
 }
 #endif // MAGICWALL_H
