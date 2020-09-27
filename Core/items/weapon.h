@@ -6,7 +6,10 @@
 
 namespace core::items {
 
-
+/**
+ * @brief The Weapon class
+ * These items are all weapons.
+ */
 class Weapon final : public Item {
 
 public:

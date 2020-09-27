@@ -1,7 +1,6 @@
 #ifndef QUARTZCHAMBER_H
 #define QUARTZCHAMBER_H
 
-#include <memory>
 #include "Core/dungeon/room.h"
 
 

@@ -6,6 +6,10 @@
 
 namespace core::items {
 
+/**
+ * @brief The Item class
+ * The abstract prototype class used for creating and cloning concrete items.
+ */
 class Item
 {
 public:
@@ -16,6 +20,12 @@ public:
     virtual std::string name() const;
     virtual char displayCharacter() const;
 
+    /**
+     * @brief operator <<
+     * @param display
+     * @return std::ostream&
+     * Formats a description of the item ready for the describe menu.
+     */
     std::ostream& operator <<(std::ostream &display);
 
 private:

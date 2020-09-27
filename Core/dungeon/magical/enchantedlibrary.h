@@ -6,7 +6,10 @@
 
 namespace core::dungeon::magical {
 
-
+/**
+ * @brief The EnchantedLibrary class
+ * A type of room for magical dungeons.
+ */
 class EnchantedLibrary final : public Room
 {
 public:

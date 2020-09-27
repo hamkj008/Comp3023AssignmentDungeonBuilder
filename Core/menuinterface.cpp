@@ -103,6 +103,7 @@ void MenuInterface::randomDungeonMenu(){
     int width{};
     int height{};
 
+    // User input check gate. If correct can advance to next section.
     bool nameCheck{};
     do {
         nameCheck = true;
@@ -114,6 +115,7 @@ void MenuInterface::randomDungeonMenu(){
         }
     }while(nameCheck == false);
 
+    // User input check gate. If correct can advance to next section.
     bool rowCheck{};
     do {
         rowCheck = true;
@@ -133,6 +135,7 @@ void MenuInterface::randomDungeonMenu(){
         }
     } while(rowCheck == false);
 
+    // User input check gate. If correct can advance to next section.
     bool colCheck{};
     do {
         colCheck = true;
@@ -152,6 +155,7 @@ void MenuInterface::randomDungeonMenu(){
         }
     } while(colCheck == false);
 
+    // User input check gate. If correct can advance to next section.
     bool typeCheck{};
     do {
         typeCheck = true;
@@ -183,6 +187,7 @@ void MenuInterface::randomDungeonMenu(){
 }
 
 void MenuInterface::dungeonViewMenu(){
+    // User input check gate. If correct can advance to next section.
     bool conditions = true;
     char selection{};
     do {
@@ -220,7 +225,7 @@ void MenuInterface::dungeonViewMenu(){
 }
 
 void MenuInterface::dungeonExploreMenu(){
-    // User input check gate.
+    // User input check gate. If correct can advance to next section.
     bool conditions = true;
     // The users selection
     char selection{};

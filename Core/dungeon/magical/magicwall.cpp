@@ -13,7 +13,9 @@ std::string MagicWall::description() const {
     return "Magic Wall";
 }
 
+
 char MagicWall::displayCharacter() {
+    // Had to make this look more magical
     if(this->getDirection() == Room::Direction::North or this->getDirection() == Room::Direction::South) {
         return '~';
     }

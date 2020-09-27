@@ -1,4 +1,3 @@
-#include <iostream>
 #include "quartzchamber.h"
 #include "Core/dungeon/basic/rockwall.h"
 
@@ -9,8 +8,8 @@ QuartzChamber::QuartzChamber(int &id)
     : Room(id),
     _description{"A chamber that glitters like a thousand stars in the torchlight. (Quartz Chamber)"}
 {
-    std::cout << "in quartzChamber constructor" << std::endl;
 
+    // Each room has Walls by default.
     _northEdge = std::make_shared<RockWall>();
     _northEdge->setDirection(Room::Direction::North);
     _southEdge = std::make_shared<RockWall>();

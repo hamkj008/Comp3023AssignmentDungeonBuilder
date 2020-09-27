@@ -2,7 +2,6 @@
 #define MAGICALDUNGEONLEVEL_H
 
 #include "Core/dungeon/dungeonlevel.h"
-
 #include <string>
 
 

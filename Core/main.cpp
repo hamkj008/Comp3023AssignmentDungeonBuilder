@@ -2,8 +2,8 @@
 #include "Core/menuinterface.h"
 
 /**
- * @brief main
- * @return
+ * @brief main. Executes the application
+ * @return 0 if exited successfully.
  */
 int main()
 {

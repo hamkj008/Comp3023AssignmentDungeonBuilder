@@ -1,5 +1,5 @@
 #include "rockwall.h"
-#include <sstream>
+#include <iostream>
 
 namespace core::dungeon::basic {
 

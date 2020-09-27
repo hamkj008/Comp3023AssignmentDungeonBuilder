@@ -1,17 +1,14 @@
 #include "dungeonlevelbuilder.h"
-#include <iostream>
+
 
 namespace core::dungeon {
 
 DungeonLevelBuilder::DungeonLevelBuilder()
-
 {
-    std::cout << "DungeonLevelBuilder created" << std::endl;
+
 }
 DungeonLevelBuilder::~DungeonLevelBuilder()
-
 {
-    std::cout << "DungeonLevelBuilder deleted" << std::endl;
     delete _dungeonLevel;
 }
 

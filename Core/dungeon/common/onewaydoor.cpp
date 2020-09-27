@@ -1,5 +1,5 @@
 #include "onewaydoor.h"
-#include <sstream>
+#include <iostream>
 
 namespace core::dungeon::common {
 

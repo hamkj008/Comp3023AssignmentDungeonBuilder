@@ -6,7 +6,10 @@
 
 namespace core::dungeon::magical {
 
-
+/**
+ * @brief The AlchemistsLaboratory class
+ * A type of room for magical dungeons.
+ */
 class AlchemistsLaboratory final : public Room
 {
 public:

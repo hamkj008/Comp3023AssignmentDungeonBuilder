@@ -6,7 +6,10 @@
 
 namespace core::items {
 
-
+/**
+ * @brief The Consumable class
+ * The concrete consumable items class
+ */
 class Consumable final : public Item {
 
 public:

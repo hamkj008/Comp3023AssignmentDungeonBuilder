@@ -1,22 +1,20 @@
 #include "dungeonlevel.h"
 #include <sstream>
-#include <iostream>
-#include <vector>
 #include <string>
-#include <sstream>
 #include "Core/dungeon/roomedge.h"
+
 
 namespace core::dungeon {
 
 DungeonLevel::DungeonLevel(std::string &name, int &width, int &height)
     :_name{name}, _width{width}, _height{height}, _dungeonDisplay{}, _roomList{}
 {
-    std::cout << "DungeonLevel created" << std::endl;
+
 }
 
 DungeonLevel::~DungeonLevel()
 {
-    std::cout << "DungeonLevel deleted" << std::endl;
+
 }
 
 

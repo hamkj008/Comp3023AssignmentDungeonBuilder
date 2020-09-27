@@ -5,8 +5,11 @@
 
 namespace core::dungeon::common {
 
-
-class OpenDoorway : public Doorway
+/**
+ * @brief The OpenDoorway class
+ * Concrete Door type class
+ */
+class OpenDoorway final : public Doorway
 {
 public:
     OpenDoorway();
@@ -14,10 +17,21 @@ public:
 
     virtual std::string description() const override;
     virtual char displayCharacter() override;
-    virtual bool isPassage() const override;
 
+    /**
+     * @brief isPassage
+     * @return true if connected as a Passage.
+     * If connected to another doorway type, the connection becomes a Passage.
+     */
+    virtual bool isPassage() const override;
     virtual void setPassage(bool passage) override;
 
+    /**
+     * @brief operator <<
+     * @param display
+     * @return
+     * Formats the object to be described in the describe menu.
+     */
     virtual std::ostream& operator <<(std::ostream &display) override;
 
 private:

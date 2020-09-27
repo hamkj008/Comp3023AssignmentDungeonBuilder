@@ -1,4 +1,3 @@
-#include <iostream>
 #include "basicdungeonlevelbuilder.h"
 #include "Core/dungeon/basic/rockchamber.h"
 #include "Core/dungeon/basic/quartzchamber.h"
@@ -57,14 +56,11 @@ void BasicDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, in
 
     _dungeonLevel = new BasicDungeonLevel(name, width, height);
 
-   std::cout << "number of rooms " << _dungeonLevel->numberOfRooms() << std::endl;
-
    int i{1};
    // Adds rooms to the roomlist untill the maximum number of rooms is reached.
    while(i <= _dungeonLevel->numberOfRooms()) {
        std::shared_ptr<Room> room = buildRoom(i);
        _dungeonLevel->addRoom(room);
-       std::cout << room->id() << std::endl;
        i++;
    }
 }

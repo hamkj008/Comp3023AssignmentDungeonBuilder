@@ -75,17 +75,23 @@ public:
     /**
      * @brief createDoor
      * @param door
-     * Helper method to decide the door type frequency.
+     * Helper method to decide the frequency of each door type.
      */
     void createDoor(std::shared_ptr<core::dungeon::Doorway> &door);
 
+    /**
+     * @brief operator <<
+     * @param display
+     * @return std::ostream&
+     * Displays the description of the dungeon level.
+     */
     std::ostream& operator <<(std::ostream &display);
 
 private:
     Game();
 
     static Game *_theInstance;
-    core::dungeon::DungeonLevelBuilder *_DB;
+    core::dungeon::DungeonLevelBuilder *_dungeonBuilder;
 
     std::mt19937 _randomGenerator{uint32_t(time(nullptr))}; //!< Mersenne Twister random number generator seeded by current time
     std::uniform_real_distribution<double> _realDistribution{0.0, 1.0}; //!< For random numbers between 0.0 & 1.0

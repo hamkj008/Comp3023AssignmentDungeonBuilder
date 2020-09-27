@@ -9,8 +9,8 @@ RockChamber::RockChamber(int &id)
     : Room(id),
       _description{"A dark and empty chamber. (Rock Chamber)"}
 {
-    std::cout << "in RockChamber constructor" << std::endl;
 
+    // Each room has Walls by default.
     _northEdge = std::make_shared<RockWall>();
     _northEdge->setDirection(Room::Direction::North);
     _southEdge = std::make_shared<RockWall>();

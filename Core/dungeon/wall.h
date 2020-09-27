@@ -6,7 +6,11 @@
 
 namespace core::dungeon {
 
-
+/**
+ * @brief The Wall class
+ * Abstract RoomEdge class that is the base class for wall types.
+ * Walls are like Doorways but unconnectable as a passage.
+ */
 class Wall : public RoomEdge
 {
 public:

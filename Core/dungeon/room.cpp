@@ -1,4 +1,3 @@
-#include <iostream>
 #include <memory>
 #include <sstream>
 
@@ -9,6 +8,7 @@
 #include "Core/dungeon/basic/rockwall.h"
 #include "Core/dungeon/common/onewaydoor.h"
 
+
 namespace core::dungeon {
 
 
@@ -16,10 +16,11 @@ Room::Room(int id)
     : _northEdge{}, _southEdge{}, _eastEdge{}, _westEdge{},
       _id{id}, _description{}, _creature{}, _item{}
 {
-    std::cout << "Room created" << std::endl;
+
 }
-Room::~Room() {
-    std::cout << "Room deleted" << std::endl;
+Room::~Room()
+{
+
 }
 
 std::string Room::description() const {
@@ -30,18 +31,19 @@ std::array<std::string, 5> Room::display() {
     std::stringstream stringstream{};
     std::array<std::string, 5> roomDisplay{};
 
-    // Set top
+    // Set top line
     stringstream << "+----" << _northEdge->displayCharacter() << "----+";
     roomDisplay[0] = stringstream.str();
     stringstream.str("");
 
-    // set mid1
+    // set mid1 line
     stringstream << "|         |";
     roomDisplay[1] = stringstream.str();
     stringstream.str("");
 
-    // set mid2
+    // set mid2 line
     char itemDisplay{};
+    // Blank display if no item set
     if(_item == nullptr) {
         itemDisplay = ' ';
     }
@@ -50,6 +52,7 @@ std::array<std::string, 5> Room::display() {
     }
 
     char creatureDisplay{};
+    // Blank display if no creature set
     if(_creature == nullptr) {
         creatureDisplay = ' ';
     }
@@ -58,9 +61,11 @@ std::array<std::string, 5> Room::display() {
     }
 
     char bossDisplay{};
+    // Blank display if no creature set as a Boss
     if(_creature == nullptr) {
         bossDisplay = ' ';
     }
+    // Display if creature is a Boss
     else if(_creature->isBoss() == true) {
         bossDisplay = '*';
     }
@@ -75,12 +80,12 @@ std::array<std::string, 5> Room::display() {
     stringstream.str("");
 
 
-    // set mid3
+    // set mid3 line
     stringstream << "|         |";
     roomDisplay[3] = stringstream.str();
     stringstream.str("");
 
-    // set bottom
+    // set bottom line
     stringstream << "+----" << _southEdge->displayCharacter() << "----+";
     roomDisplay[4] = stringstream.str();
     stringstream.str("");

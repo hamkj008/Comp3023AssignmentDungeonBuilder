@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Core/dungeon/magical/alchemistslaboratory.h"
 #include "Core/dungeon/magical/magicwall.h"
 
@@ -10,7 +9,6 @@ AlchemistsLaboratory::AlchemistsLaboratory(int &id)
     : Room(id),
     _description{"Bubbling liquids and eye of newt. (Alchemists Laboratory)"}
 {
-    std::cout << "in Alchemists Laboratory constructor" << std::endl;
 
     _northEdge = std::make_shared<MagicWall>();
     _northEdge->setDirection(Room::Direction::North);

@@ -1,4 +1,4 @@
-# Doxyfile 1.8.19
+# Doxyfile 1.8.20
 
 # This file describes the settings to be used by the documentation system
 # doxygen (www.doxygen.org) for a project.
@@ -226,6 +226,14 @@ QT_AUTOBRIEF           = NO
 # The default value is: NO.
 
 MULTILINE_CPP_IS_BRIEF = NO
+
+# By default Python docstrings are displayed as preformatted text and doxygen's
+# special commands cannot be used. By setting PYTHON_DOCSTRING to NO the
+# doxygen's special commands can be used and the contents of the docstring
+# documentation blocks is shown as doxygen documentation.
+# The default value is: YES.
+
+PYTHON_DOCSTRING       = YES
 
 # If the INHERIT_DOCS tag is set to YES then an undocumented member inherits the
 # documentation from any documented member that it re-implements.
@@ -1553,7 +1561,7 @@ DISABLE_INDEX          = NO
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-GENERATE_TREEVIEW      = YES
+GENERATE_TREEVIEW      = NO
 
 # The ENUM_VALUES_PER_LINE tag can be used to set the number of enum values that
 # doxygen will group on one line in the generated HTML documentation.
@@ -1758,7 +1766,7 @@ EXTRA_SEARCH_MAPPINGS  =
 # If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.
 # The default value is: YES.
 
-GENERATE_LATEX         = NO
+GENERATE_LATEX         = YES
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of

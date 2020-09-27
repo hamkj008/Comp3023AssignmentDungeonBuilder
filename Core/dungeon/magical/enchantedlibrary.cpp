@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Core/dungeon/magical/enchantedlibrary.h"
 #include "Core/dungeon/magical/magicwall.h"
 
@@ -10,7 +9,6 @@ EnchantedLibrary::EnchantedLibrary(int &id)
     : Room(id),
     _description{"A thousand floating books. (Enchanted Library)"}
 {
-    std::cout << "in Enchanted Library constructor" << std::endl;
 
     _northEdge = std::make_shared<MagicWall>();
     _northEdge->setDirection(Room::Direction::North);

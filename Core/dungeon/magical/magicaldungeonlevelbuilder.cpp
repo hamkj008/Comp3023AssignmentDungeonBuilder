@@ -1,4 +1,3 @@
-#include <iostream>
 #include "magicaldungeonlevelbuilder.h"
 #include "Core/dungeon/magical/magicaldungeonlevel.h"
 #include "Core/creatures/monster.h"
@@ -41,8 +40,9 @@ MagicalDungeonLevelBuilder::MagicalDungeonLevelBuilder()
     _magicCreatureList.push_back(evilWizard);
     std::shared_ptr<core::creatures::AbstractCreature> dragon = std::make_shared<core::creatures::Monster>("Dragon");
     _magicCreatureList.push_back(dragon);
-
 }
+
+
 void MagicalDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, int height) {
     if(width < 1) {
         width = 1;
@@ -59,14 +59,11 @@ void MagicalDungeonLevelBuilder::buildDungeonLevel(std::string name, int width, 
 
     _dungeonLevel = new MagicalDungeonLevel(name, width, height);
 
-   std::cout << "number of rooms " << _dungeonLevel->numberOfRooms() << std::endl;
-
    int i{1};
    // Adds rooms to the roomlist untill the maximum number of rooms is reached.
    while(i <= _dungeonLevel->numberOfRooms()) {
        std::shared_ptr<Room> room = buildRoom(i);
        _dungeonLevel->addRoom(room);
-       std::cout << room->id() << std::endl;
        i++;
    }
 }
@@ -107,7 +104,6 @@ void MagicalDungeonLevelBuilder::buildItem(std::shared_ptr<Room> &room) {
     int randomItemNum = randomDouble * ((max + 1) - min) + min;
 
     std::shared_ptr<core::items::Item> newItem = _magicItemList[randomItemNum]->clone();
-
     room->setItem(newItem);
 }
 

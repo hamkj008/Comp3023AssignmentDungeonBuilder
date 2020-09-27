@@ -6,7 +6,10 @@
 
 namespace core::creatures {
 
-
+/**
+ * @brief The Monster class
+ * The concrete creature class
+ */
 class Monster final : public AbstractCreature
 {
 public:

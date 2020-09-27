@@ -8,7 +8,10 @@
 
 namespace core::dungeon {
 
-
+/**
+ * @brief The DungeonLevelBuilder class
+ * Prototype builder, provides the interface for the concrete builder classes.
+ */
 class DungeonLevelBuilder
 {
 public:
